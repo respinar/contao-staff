@@ -20,6 +20,6 @@
   </figure>
 
 
-  <div class="title"><a href="<?php echo $this->link; ?>"><?php echo $this->title; ?> (<?php echo $this->model; ?>)</a></div>
+  <div class="title"><a href="<?php echo $this->link; ?>"><?php echo $this->title; ?></a></div>
 
 </div>

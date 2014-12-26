@@ -46,4 +46,6 @@ TemplateLoader::addFiles(array
 (
 	'mod_department_list'   => 'system/modules/department/templates/modules',
 	'mod_department_detail' => 'system/modules/department/templates/modules',
+	'person_full'           => 'system/modules/department/templates/person',
+	'person_short'          => 'system/modules/department/templates/person',
 ));
