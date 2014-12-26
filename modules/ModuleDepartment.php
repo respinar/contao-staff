@@ -95,16 +95,12 @@ abstract class ModuleDepartment extends \Module
 
 		$objTemplate->class = (($this->person_class != '') ? ' ' . $this->person_class : '') . $strClass;
 
-
-		$objTemplate->title = $objPerson->firstname . ' ' . $objPerson->lastname;
-
 		if (!empty($objPerson->education))
 		{
 			$objTemplate->education    = deserialize($objPerson->education);
 		}
 
-		$objTemplate->link        = $this->generateSetUrl($objPerson, $blnAddDepartment);
-		$objTemplate->more        = $this->generateLink($GLOBALS['TL_LANG']['MSC']['moredetail'], $objPerson, $blnAddDepartment, true);
+		$objTemplate->link        = $this->generatePersonUrl($objPerson, $blnAddDepartment);
 
 		$objTemplate->department  = $objPerson->getRelated('pid');
 
@@ -191,7 +187,7 @@ abstract class ModuleDepartment extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateSetUrl($objItem, $blnAddDepartment=false)
+	protected function generatePersonUrl($objItem, $blnAddDepartment=false)
 	{
 		$strCacheKey = 'id_' . $objItem->id;
 
@@ -236,8 +232,8 @@ abstract class ModuleDepartment extends \Module
 	{
 
 		return sprintf('<a href="%s" title="%s">%s%s</a>',
-						$this->generateSetUrl($objPerson, $blnAddDepartment),
-						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objPerson->title), true),
+						$this->generatePersonUrl($objPerson, $blnAddDepartment),
+						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objPerson->firstname . ' ' . $objPerson->lastname), true),
 						$strLink,
 						($blnIsReadMore ? ' <span class="invisible">'.$objPerson->title.'</span>' : ''));
 

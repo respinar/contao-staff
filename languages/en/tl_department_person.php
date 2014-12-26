@@ -67,5 +67,10 @@ $GLOBALS['TL_LANG']['tl_department_person']['delete'] = array('Delete person', '
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_department_person']['sameDay']	= 'Same day';
-$GLOBALS['TL_LANG']['tl_department_person']['otherDay']	= 'Other days';
+$GLOBALS['TL_LANG']['tl_department_person']['sameDay']  = 'Same day';
+$GLOBALS['TL_LANG']['tl_department_person']['otherDay'] = 'Other days';
+$GLOBALS['TL_LANG']['tl_department_person']['mr']       = 'Mr.';
+$GLOBALS['TL_LANG']['tl_department_person']['mrs']      = 'Mrs.';
+$GLOBALS['TL_LANG']['tl_department_person']['dr']       = 'Dr.';
+$GLOBALS['TL_LANG']['tl_department_person']['prof']     = 'Prof.';
+$GLOBALS['TL_LANG']['tl_department_person']['msc']      = 'MSc.';

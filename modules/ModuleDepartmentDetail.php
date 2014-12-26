@@ -83,7 +83,7 @@ class ModuleDepartmentDetail extends \ModuleDepartment
 		// Overwrite the page title
 		if ($objPerson->title != '')
 		{
-			$objPage->pageTitle = strip_tags(strip_insert_tags($objPerson->firstname . ' ' .$objPerson->lastname));
+			$objPage->pageTitle = strip_tags(strip_insert_tags($objPerson->title . ' ' .$objPerson->name));
 		}
 
 		// Overwrite the page description

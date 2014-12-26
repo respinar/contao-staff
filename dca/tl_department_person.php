@@ -45,12 +45,12 @@ $GLOBALS['TL_DCA']['tl_department_person'] = array
 		'sorting' => array
 		(
 			'mode'                    => 1,
-			'fields'                  => array('lastname','firstname'),
+			'fields'                  => array('name'),
 			'flag'                    => 1
 		),
 		'label' => array
 		(
-			'fields'                  => array('firstname','lastname'),
+			'fields'                  => array('title','name'),
 			'format'                  => '%s %s'
 		),
 		'global_operations' => array
@@ -97,7 +97,7 @@ $GLOBALS['TL_DCA']['tl_department_person'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},firstname,lastname,alias;{image_legend},singleSRC;{employee_legend},post,date;{education_legend},degree,education;{contact_legend},floor,room,phone,ext,mobile,fax,email,website;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
+		'default'                     => '{title_legend},name,title,alias;{image_legend},singleSRC;{employee_legend},post,date;{education_legend},degree,education;{contact_legend},floor,room,phone,ext,mobile,fax,email,website;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -124,21 +124,23 @@ $GLOBALS['TL_DCA']['tl_department_person'] = array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-		'firstname' => array
+		'name' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_department_person']['firstname'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_department_person']['name'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255,'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'lastname' => array
+		'title' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_department_person']['lastname'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_department_person']['title'],
 			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255,'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'inputType'               => 'select',
+			'options'                 => array('mr','mrs','dr','prof','msc'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_department_person'],
+			'eval'                    => array('maxlength'=>255,'tl_class'=>'w50'),
+			'sql'                     => "char(10) NOT NULL default ''"
 		),
 		'alias' => array
 		(
