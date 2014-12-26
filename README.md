@@ -1,4 +1,4 @@
-staff
+Department
 =====
 
-Staff module for Contao
+Department module for Contao
