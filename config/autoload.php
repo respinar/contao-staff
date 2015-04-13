@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2005-2014 Leo Feyer
  *
- * @package Department
+ * @package Staff
  * @link    https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
@@ -16,7 +16,7 @@
  */
 ClassLoader::addNamespaces(array
 (
-	'department',
+	'staff',
 ));
 
 
@@ -26,16 +26,16 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Classes
-	'department\Department'             => 'system/modules/department/classes/Department.php',
+	'staff\Staff'             => 'system/modules/staff/classes/Staff.php',
 
 	// Modules
-	'department\ModuleDepartment'       => 'system/modules/department/modules/ModuleDepartment.php',
-	'department\ModuleDepartmentList'   => 'system/modules/department/modules/ModuleDepartmentList.php',
-	'department\ModuleDepartmentDetail' => 'system/modules/department/modules/ModuleDepartmentDetail.php',
+	'staff\ModuleStaff'       => 'system/modules/staff/modules/ModuleStaff.php',
+	'staff\ModuleStaffList'   => 'system/modules/staff/modules/ModuleStaffList.php',
+	'staff\ModuleStaffDetail' => 'system/modules/staff/modules/ModuleStaffDetail.php',
 
 	// Models
-	'department\DepartmentModel'        => 'system/modules/department/models/DepartmentModel.php',
-	'department\DepartmentPersonModel'  => 'system/modules/department/models/DepartmentPersonModel.php',
+	'staff\StaffModel'        => 'system/modules/staff/models/StaffModel.php',
+	'staff\StaffMemberModel'  => 'system/modules/staff/models/StaffMemberModel.php',
 ));
 
 
@@ -44,8 +44,8 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_department_list'   => 'system/modules/department/templates/modules',
-	'mod_department_detail' => 'system/modules/department/templates/modules',
-	'person_full'           => 'system/modules/department/templates/person',
-	'person_short'          => 'system/modules/department/templates/person',
+	'mod_staff_list'   => 'system/modules/staff/templates/modules',
+	'mod_staff_detail' => 'system/modules/staff/templates/modules',
+	'member_full'      => 'system/modules/staff/templates/member',
+	'member_short'     => 'system/modules/staff/templates/member',
 ));

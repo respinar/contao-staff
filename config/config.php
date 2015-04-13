@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2005-2014 Leo Feyer
  *
- * @package   department
+ * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL3
  * @copyright respinar 2014
@@ -17,10 +17,10 @@
  */
 array_insert($GLOBALS['BE_MOD']['content'], 1, array
 (
-	'department' => array
+	'staff' => array
 	(
-		'tables'     => array('tl_department','tl_department_person'),
-		'icon'       => 'system/modules/department/assets/icon.png',
+		'tables'     => array('tl_staff','tl_staff_member'),
+		'icon'       => 'system/modules/staff/assets/icon.png',
 	)
 ));
 
@@ -30,9 +30,9 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 
 array_insert($GLOBALS['FE_MOD'], 2, array
 (
-	'department' => array
+	'staff' => array
 	(
-		'department_list'    => 'ModuleDepartmentList',
-		'department_detail'  => 'ModuleDepartmentDetail'
+		'staff_list'    => 'ModuleStaffList',
+		'staff_detail'  => 'ModuleStaffDetail'
 	)
 ));

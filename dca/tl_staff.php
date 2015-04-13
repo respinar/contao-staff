@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2005-2014 Leo Feyer
  *
- * @package   department
+ * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL3
  * @copyright respinar 2014
@@ -13,16 +13,16 @@
 
 
 /**
- * Table tl_department
+ * Table tl_staff
  */
-$GLOBALS['TL_DCA']['tl_department'] = array
+$GLOBALS['TL_DCA']['tl_staff'] = array
 (
 
 	// Config
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ctable'                      => array('tl_department_person'),
+		'ctable'                      => array('tl_staff_member'),
 		'enableVersioning'            => true,
 		'sql' => array
 		(
@@ -62,32 +62,32 @@ $GLOBALS['TL_DCA']['tl_department'] = array
 		(
 			'edit' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_department']['edit'],
-				'href'                => 'table=tl_department_person',
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff']['edit'],
+				'href'                => 'table=tl_staff_member',
 				'icon'                => 'edit.gif'
 			),
 			'editheader' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_department']['editheader'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff']['editheader'],
 				'href'                => 'act=edit',
 				'icon'                => 'header.gif'
 			),
 			'copy' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_department']['copy'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff']['copy'],
 				'href'                => 'act=copy',
 				'icon'                => 'copy.gif'
 			),
 			'delete' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_department']['delete'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'show' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_department']['show'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
 			)
@@ -104,7 +104,7 @@ $GLOBALS['TL_DCA']['tl_department'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'protected'                   => 'groups'
+		'protected'                   => 'staffs'
 	),
 
 	// Fields
@@ -120,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_department'] = array
 		),
 		'title' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_department']['title'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff']['title'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
@@ -128,7 +128,7 @@ $GLOBALS['TL_DCA']['tl_department'] = array
 		),
 		'language' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_department']['language'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff']['language'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'filter'                  => true,
@@ -138,16 +138,16 @@ $GLOBALS['TL_DCA']['tl_department'] = array
 		),
 		'master' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_department']['master'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff']['master'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_department', 'getDepartments'),
-			'eval'                    => array('includeBlankOption'=>true, 'blankOptionLabel'=>&$GLOBALS['TL_LANG']['tl_department']['isMaster']),
+			'options_callback'        => array('tl_staff', 'getStaffs'),
+			'eval'                    => array('includeBlankOption'=>true, 'blankOptionLabel'=>&$GLOBALS['TL_LANG']['tl_staff']['isMaster']),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'jumpTo' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_department']['jumpTo'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
@@ -157,18 +157,18 @@ $GLOBALS['TL_DCA']['tl_department'] = array
 		),
 		'protected' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_department']['protected'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff']['protected'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
-		'groups' => array
+		'staffs' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_department']['groups'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff']['staffs'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'foreignKey'              => 'tl_member_group.name',
+			'foreignKey'              => 'tl_member_staff.name',
 			'eval'                    => array('mandatory'=>true, 'multiple'=>true),
 			'sql'                     => "blob NULL",
 			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
@@ -176,27 +176,27 @@ $GLOBALS['TL_DCA']['tl_department'] = array
 	)
 );
 
-class tl_department extends Backend
+class tl_staff extends Backend
 {
 
 	/**
-	 * Get an array of possible departments
+	 * Get an array of possible staffs
 	 *
 	 * @param	DataContainer
 	 * @return	array
 	 * @link	http://www.contao.org/callbacks.html#options_callback
 	 */
-	public function getDepartments(DataContainer $dc)
+	public function getStaffs(DataContainer $dc)
 	{
-		$arrDepartments = array();
-		$objDepartments = $this->Database->prepare("SELECT * FROM tl_department WHERE language!=? AND id!=? AND master=0 ORDER BY title")->execute($dc->activeRecord->language, $dc->id);
+		$arrStaffs = array();
+		$objStaffs = $this->Database->prepare("SELECT * FROM tl_staff WHERE language!=? AND id!=? AND master=0 ORDER BY title")->execute($dc->activeRecord->language, $dc->id);
 
-		while( $objDepartments->next() )
+		while( $objStaffs->next() )
 		{
-			$arrDepartments[$objDepartments->id] = sprintf($GLOBALS['TL_LANG']['tl_department']['isSlave'], $objDepartments->title);
+			$arrStaffs[$objStaffs->id] = sprintf($GLOBALS['TL_LANG']['tl_staff']['isSlave'], $objStaffs->title);
 		}
 
-		return $arrDepartments;
+		return $arrStaffs;
 	}
 }
 

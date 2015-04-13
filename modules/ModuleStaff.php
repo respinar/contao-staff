@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2005-2014 Leo Feyer
  *
- * @package   department
+ * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL3
  * @copyright respinar 2014
@@ -15,17 +15,17 @@
 /**
  * Namespace
  */
-namespace department;
+namespace staff;
 
 
 /**
- * Class ModuleDepartment
+ * Class ModuleStaff
  *
  * @copyright  respinar 2014
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-abstract class ModuleDepartment extends \Module
+abstract class ModuleStaff extends \Module
 {
 
 	/**
@@ -40,41 +40,41 @@ abstract class ModuleDepartment extends \Module
 	 * @param array
 	 * @return array
 	 */
-	protected function sortOutProtected($arrDepartments)
+	protected function sortOutProtected($arrStaffs)
 	{
-		if (BE_USER_LOGGED_IN || !is_array($arrDepartments) || empty($arrDepartments))
+		if (BE_USER_LOGGED_IN || !is_array($arrStaffs) || empty($arrStaffs))
 		{
-			return $arrDepartments;
+			return $arrStaffs;
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objDepartment = \DepartmentModel::findMultipleByIds($arrDepartments);
-		$arrDepartments = array();
+		$objStaff = \StaffModel::findMultipleByIds($arrStaffs);
+		$arrStaffs = array();
 
-		if ($objDepartment !== null)
+		if ($objStaff !== null)
 		{
-			while ($objDepartment->next())
+			while ($objStaff->next())
 			{
-				if ($objDepartment->protected)
+				if ($objStaff->protected)
 				{
 					if (!FE_USER_LOGGED_IN)
 					{
 						continue;
 					}
 
-					$groups = deserialize($objDepartment->groups);
+					$staffs = deserialize($objStaff->staffs);
 
-					if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
+					if (!is_array($staffs) || empty($staffs) || !count(array_intersect($staffs, $this->User->staffs)))
 					{
 						continue;
 					}
 				}
 
-				$arrDepartments[] = $objDepartment->id;
+				$arrStaffs[] = $objStaff->id;
 			}
 		}
 
-		return $arrDepartments;
+		return $arrStaffs;
 	}
 
 
@@ -86,23 +86,23 @@ abstract class ModuleDepartment extends \Module
 	 * @param integer
 	 * @return string
 	 */
-	protected function parsePerson($objPerson, $blnAddDepartment=false, $strClass='', $intCount=0)
+	protected function parsePerson($objPerson, $blnAddStaff=false, $strClass='', $intCount=0)
 	{
 		global $objPage;
 
-		$objTemplate = new \FrontendTemplate($this->person_template);
+		$objTemplate = new \FrontendTemplate($this->member_template);
 		$objTemplate->setData($objPerson->row());
 
-		$objTemplate->class = (($this->person_class != '') ? ' ' . $this->person_class : '') . $strClass;
+		$objTemplate->class = (($this->member_class != '') ? ' ' . $this->member_class : '') . $strClass;
 
 		if (!empty($objPerson->education))
 		{
 			$objTemplate->education    = deserialize($objPerson->education);
 		}
 
-		$objTemplate->link        = $this->generatePersonUrl($objPerson, $blnAddDepartment);
+		$objTemplate->link        = $this->generatePersonUrl($objPerson, $blnAddStaff);
 
-		$objTemplate->department  = $objPerson->getRelated('pid');
+		$objTemplate->staff  = $objPerson->getRelated('pid');
 
 		$objTemplate->count = $intCount; // see #5708
 
@@ -161,7 +161,7 @@ abstract class ModuleDepartment extends \Module
 	 * @param boolean
 	 * @return array
 	 */
-	protected function parsePersons($objPersons, $blnAddDepartment=false)
+	protected function parsePersons($objPersons, $blnAddStaff=false)
 	{
 		$limit = $objPersons->count();
 
@@ -175,7 +175,7 @@ abstract class ModuleDepartment extends \Module
 
 		while ($objPersons->next())
 		{
-			$arrPersons[] = $this->parsePerson($objPersons, $blnAddDepartment, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
+			$arrPersons[] = $this->parsePerson($objPersons, $blnAddStaff, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
 		}
 
 		return $arrPersons;
@@ -187,7 +187,7 @@ abstract class ModuleDepartment extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generatePersonUrl($objItem, $blnAddDepartment=false)
+	protected function generatePersonUrl($objItem, $blnAddStaff=false)
 	{
 		$strCacheKey = 'id_' . $objItem->id;
 
@@ -228,11 +228,11 @@ abstract class ModuleDepartment extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateLink($strLink, $objPerson, $blnAddDepartment=false, $blnIsReadMore=false)
+	protected function generateLink($strLink, $objPerson, $blnAddStaff=false, $blnIsReadMore=false)
 	{
 
 		return sprintf('<a href="%s" title="%s">%s%s</a>',
-						$this->generatePersonUrl($objPerson, $blnAddDepartment),
+						$this->generatePersonUrl($objPerson, $blnAddStaff),
 						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objPerson->firstname . ' ' . $objPerson->lastname), true),
 						$strLink,
 						($blnIsReadMore ? ' <span class="invisible">'.$objPerson->title.'</span>' : ''));

@@ -1,9 +1,9 @@
 {
-    "name": "respinar/department",
-    "description":"Department for Contao",
-    "keywords":["contao", "department","staff","faculty"],
+    "name": "respinar/staff",
+    "description":"Staff for Contao",
+    "keywords":["contao", "department","staff","faculty","group"],
     "type": "contao-module",
-    "homepage":"https://github.com/respinar/department",
+    "homepage":"https://github.com/respinar/staff",
     "license":"LGPL-3.0+",
     "authors":[
         {
@@ -14,11 +14,11 @@
         }
     ],
     "support":{
-        "issues":"https://github.com/respinar/department/issues"
+        "issues":"https://github.com/respinar/staff/issues"
     },
     "require": {
         "php":">=5.3.2",
-        "contao/core":">=3.2,<=3.4",
+        "contao/core":">=3.2,<=3.5",
         "contao-community-alliance/composer-plugin":"2.*",
         "terminal42/contao-changelanguage":">=2.0"
     },
@@ -28,10 +28,10 @@
     "extra": {
         "contao": {
             "sources": {
-                "": "system/modules/department"
+                "": "system/modules/staff"
             },
             "transifex": {
-				"project": "department",
+				"project": "staff",
 				"prefix": "master-",
 				"languages_cto": "languages",
 				"languages_tx": ".tx"

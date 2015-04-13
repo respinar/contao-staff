@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2005-2014 Leo Feyer
  *
- * @package   department
+ * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL3
  * @copyright respinar 2014
@@ -15,24 +15,24 @@
 /**
  * Namespace
  */
-namespace department;
+namespace staff;
 
 
 /**
- * Class ModuleDepartmentDetail
+ * Class ModuleStaffDetail
  *
  * @copyright  respinar 2014
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class ModuleDepartmentDetail extends \ModuleDepartment
+class ModuleStaffDetail extends \ModuleStaff
 {
 
 	/**
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'mod_department_detail';
+	protected $strTemplate = 'mod_staff_detail';
 
 	/**
 	 * Display a wildcard in the back end
@@ -44,7 +44,7 @@ class ModuleDepartmentDetail extends \ModuleDepartment
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['department_detail'][0]) . ' ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['staff_detail'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -59,7 +59,7 @@ class ModuleDepartmentDetail extends \ModuleDepartment
 			\Input::setGet('items', \Input::get('auto_item'));
         }
 
-        $this->departments = $this->sortOutProtected(deserialize($this->departments));
+        $this->staffs = $this->sortOutProtected(deserialize($this->staffs));
 
 
 		return parent::generate();
@@ -74,11 +74,11 @@ class ModuleDepartmentDetail extends \ModuleDepartment
 
 		global $objPage;
 
-		$this->Template->person = '';
+		$this->Template->member = '';
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$objPerson = \DepartmentPersonModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->departments);
+		$objPerson = \StaffMemberModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->staffs);
 
 		// Overwrite the page title
 		if ($objPerson->title != '')
@@ -94,7 +94,7 @@ class ModuleDepartmentDetail extends \ModuleDepartment
 
 		$arrPerson = $this->parsePerson($objPerson);
 
-		$this->Template->person = $arrPerson;
+		$this->Template->member = $arrPerson;
 
 	}
 }

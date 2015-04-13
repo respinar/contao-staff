@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2005-2014 Leo Feyer
  *
- * @package   department
+ * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL3
  * @copyright respinar 2014
@@ -15,23 +15,23 @@
 /**
  * Namespace
  */
-namespace department;
+namespace staff;
 
 /**
- * Class ModuleDepartmentPerson
+ * Class ModuleStaffMember
  *
  * @copyright  respinar 2014
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class DepartmentPersonModel extends \Model
+class StaffMemberModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_department_person';
+	protected static $strTable = 'tl_staff_member';
 
 	/**
 	 * Find published news items by their parent ID and ID or alias

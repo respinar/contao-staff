@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2005-2014 Leo Feyer
  *
- * @package   department
+ * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL3
  * @copyright respinar 2014
@@ -15,24 +15,24 @@
 /**
  * Namespace
  */
-namespace department;
+namespace staff;
 
 
 /**
- * Class ModuleDepartmentList
+ * Class ModuleStaffList
  *
  * @copyright  respinar 2014
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class ModuleDepartmentList extends \ModuleDepartment
+class ModuleStaffList extends \ModuleStaff
 {
 
 	/**
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'mod_department_list';
+	protected $strTemplate = 'mod_staff_list';
 
 	/**
 	 * Display a wildcard in the back end
@@ -44,7 +44,7 @@ class ModuleDepartmentList extends \ModuleDepartment
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['department_list'][0]) . ' ###';
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['staff_list'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
@@ -53,18 +53,18 @@ class ModuleDepartmentList extends \ModuleDepartment
 			return $objTemplate->parse();
 		}
 
-		$this->departments = $this->sortOutProtected(deserialize($this->departments));
+		$this->staffs = $this->sortOutProtected(deserialize($this->staffs));
 
-		// No departments available
-		if (!is_array($this->departments) || empty($this->departments))
+		// No staffs available
+		if (!is_array($this->staffs) || empty($this->staffs))
 		{
 			return '';
 		}
 
 		// Show the catalog detail if an item has been selected
-		if ($this->department_detailModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
+		if ($this->staff_detailModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
 		{
-			return $this->getFrontendModule($this->department_detailModule, $this->strColumn);
+			return $this->getFrontendModule($this->staff_detailModule, $this->strColumn);
 		}
 
 		return parent::generate();
@@ -86,10 +86,10 @@ class ModuleDepartmentList extends \ModuleDepartment
 			$limit = $this->numberOfItems;
 		}
 
-		$this->Template->persons = array();
-		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyDepartment'];
+		$this->Template->members = array();
+		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyStaff'];
 
-		$intTotal = \DepartmentPersonModel::countPublishedByPids($this->departments);
+		$intTotal = \StaffMemberModel::countPublishedByPids($this->staffs);
 
 		if ($intTotal < 1)
 		{
@@ -143,18 +143,18 @@ class ModuleDepartmentList extends \ModuleDepartment
 		// Get the items
 		if (isset($limit))
 		{
-			$objPersons = \DepartmentPersonModel::findPublishedByPids($this->departments, null, $limit, $offset);
+			$objPersons = \StaffMemberModel::findPublishedByPids($this->staffs, null, $limit, $offset);
 		}
 		else
 		{
-			$objPersons = \DepartmentPersonModel::findPublishedByPids($this->departments, null, 0, $offset);
+			$objPersons = \StaffMemberModel::findPublishedByPids($this->staffs, null, 0, $offset);
 		}
 
 
 		// Add the Persons
 		if ($objPersons !== null)
 		{
-			$this->Template->persons = $this->parsePersons($objPersons);
+			$this->Template->members = $this->parsePersons($objPersons);
 		}
 
 	}
