@@ -86,7 +86,7 @@ class ModuleStaffList extends \ModuleStaff
 			$limit = $this->numberOfItems;
 		}
 
-		$this->Template->members = array();
+		$this->Template->persons = array();
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyStaff'];
 
 		$intTotal = \StaffPersonModel::countPublishedByPids($this->staff_categories);
@@ -154,7 +154,7 @@ class ModuleStaffList extends \ModuleStaff
 		// Add the Persons
 		if ($objPersons !== null)
 		{
-			$this->Template->members = $this->parsePersons($objPersons);
+			$this->Template->persons = $this->parsePersons($objPersons);
 		}
 
 	}

@@ -55,7 +55,7 @@ $GLOBALS['TL_LANG']['tl_staff_person']['publish_legend']     = 'Publish setting'
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_staff_person']['new']    = array('New person', 'Add a new person');
-$GLOBALS['TL_LANG']['tl_staff_person']['show']   = array('Member details', 'Show the details of person ID %s');
+$GLOBALS['TL_LANG']['tl_staff_person']['show']   = array('Person details', 'Show the details of person ID %s');
 $GLOBALS['TL_LANG']['tl_staff_person']['edit']   = array('Edit person', 'Edit person ID %s');
 $GLOBALS['TL_LANG']['tl_staff_person']['cut']    = array('Move person', 'Move person ID %s');
 $GLOBALS['TL_LANG']['tl_staff_person']['copy']   = array('Duplicate person', 'Duplicate person ID %s');

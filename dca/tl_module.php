@@ -48,7 +48,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['person_template'] = array
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['person_template'],
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_staff', 'getMemberTemplates'),
+	'options_callback'     => array('tl_module_staff', 'getPersonTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -114,7 +114,7 @@ class tl_module_staff extends Backend
 	 * @param object
 	 * @return array
 	 */
-	public function getMemberTemplates(DataContainer $dc)
+	public function getPersonTemplates(DataContainer $dc)
 	{
 		return $this->getTemplateGroup('person_', $dc->activeRecord->pid);
 	}
