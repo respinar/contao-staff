@@ -19,14 +19,14 @@
 $GLOBALS['TL_DCA']['tl_module']['palettes']['staff_list'] = '{title_legend},name,headline,type;
                                                                   {staff_legend},staff_categories;
                                                                   {config_legend},staff_detailModule,numberOfItems,perPage,skipFirst;
-                                                                  {template_legend},member_template,customTpl;
-                                                                  {member_legend},member_class,imgSize;
+                                                                  {template_legend},person_template,customTpl;
+                                                                  {person_legend},person_class,imgSize;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['staff_detail'] = '{title_legend},name,headline,type;
                                                                   {staff_legend},staff_categories;
                                                                   {image_legend},imgSize,fullsize;
-                                                                  {template_legend:hide},member_template,customTpl;
+                                                                  {template_legend:hide},person_template,customTpl;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 
@@ -43,9 +43,9 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['staff_categories'] = array
 	'eval'                 => array('multiple'=>true, 'mandatory'=>true),
     'sql'                  => "blob NULL"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['member_template'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['person_template'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['member_template'],
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['person_template'],
 	'exclude'              => true,
 	'inputType'            => 'select',
 	'options_callback'     => array('tl_module_staff', 'getMemberTemplates'),
@@ -62,9 +62,9 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['staff_detailModule'] = array
 	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 	'sql'                     => "int(10) unsigned NOT NULL default '0'"
 );
-$GLOBALS['TL_DCA']['tl_module']['fields']['member_class'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['person_class'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['member_class'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['person_class'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
@@ -116,7 +116,7 @@ class tl_module_staff extends Backend
 	 */
 	public function getMemberTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('member_', $dc->activeRecord->pid);
+		return $this->getTemplateGroup('person_', $dc->activeRecord->pid);
 	}
 
 	/**

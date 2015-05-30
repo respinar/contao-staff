@@ -23,14 +23,17 @@ ClassLoader::addNamespaces(array
  */
 ClassLoader::addClasses(array
 (
+	// Classes
+	'staff\Staff'             => 'system/modules/staff/classes/Staff.php',
+
 	// Modules
 	'staff\ModuleStaff'       => 'system/modules/staff/modules/ModuleStaff.php',
 	'staff\ModuleStaffList'   => 'system/modules/staff/modules/ModuleStaffList.php',
 	'staff\ModuleStaffDetail' => 'system/modules/staff/modules/ModuleStaffDetail.php',
 
 	// Models
-	'staff\StaffMemberModel'  => 'system/modules/staff/models/StaffMemberModel.php',
 	'staff\StaffModel'        => 'system/modules/staff/models/StaffModel.php',
+	'staff\StaffPersonModel'  => 'system/modules/staff/models/StaffPersonModel.php',
 ));
 
 
@@ -41,6 +44,6 @@ TemplateLoader::addFiles(array
 (
 	'mod_staff_detail' => 'system/modules/staff/templates/modules',
 	'mod_staff_list'   => 'system/modules/staff/templates/modules',
-	'member_full'      => 'system/modules/staff/templates/member',
-	'member_short'     => 'system/modules/staff/templates/member',
+	'person_full'      => 'system/modules/staff/templates/person',
+	'person_short'     => 'system/modules/staff/templates/person',
 ));

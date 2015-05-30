@@ -97,7 +97,7 @@ $GLOBALS['TL_DCA']['tl_staff_person'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},firstname,lastname,alias;{employee_legend},post,personship;{education_legend},degree,education;{image_legend},singleSRC;{contact_legend},floor,room,phone,ext,mobile,fax,email,website;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
+		'default'                     => '{title_legend},firstname,lastname,alias;{employee_legend},post,membership;{education_legend},degree,education;{image_legend},singleSRC;{contact_legend},floor,room,phone,ext,mobile,fax,email,website;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -174,9 +174,9 @@ $GLOBALS['TL_DCA']['tl_staff_person'] = array
 			'eval'                    => array('maxlength'=>255,'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'personship' => array
+		'membership' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_person']['personship'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_person']['membership'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feStaff'=>'personal', 'tl_class'=>'w50 wizard'),
