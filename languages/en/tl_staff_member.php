@@ -15,8 +15,8 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_staff_member']['name']             = array('First name', 'Please enter the first name.');
-$GLOBALS['TL_LANG']['tl_staff_member']['family']           = array('Last name', 'Please enter the last name.');
+$GLOBALS['TL_LANG']['tl_staff_member']['firstname']        = array('First name', 'Please enter the first name.');
+$GLOBALS['TL_LANG']['tl_staff_member']['lastname']         = array('Last name', 'Please enter the last name.');
 $GLOBALS['TL_LANG']['tl_staff_member']['alias']            = array('Alias', 'Please enter the member alias.');
 $GLOBALS['TL_LANG']['tl_staff_member']['membership']       = array('Date of membership', 'Please enter date.');
 $GLOBALS['TL_LANG']['tl_staff_member']['description']      = array('Description','Please enter description.');
@@ -42,15 +42,13 @@ $GLOBALS['TL_LANG']['tl_staff_member']['languageMain']     = array('Master membe
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_staff_member']['title_legend']       = 'member title';
-$GLOBALS['TL_LANG']['tl_staff_member']['meta_legend']        = 'Meta information for SEO';
-$GLOBALS['TL_LANG']['tl_staff_member']['spec_legend']       = 'Other specifications';
-$GLOBALS['TL_LANG']['tl_staff_member']['feature_legend']     = 'Feature specifications';
+$GLOBALS['TL_LANG']['tl_staff_member']['title_legend']       = 'Personal data';
+$GLOBALS['TL_LANG']['tl_staff_member']['employee_legend']    = 'Membership and emplyee';
+$GLOBALS['TL_LANG']['tl_staff_member']['education_legend']   = 'Education details';
+$GLOBALS['TL_LANG']['tl_staff_member']['contact_legend']     = 'Contact details';
 $GLOBALS['TL_LANG']['tl_staff_member']['enclosure_legend']   = 'Enclosures';
 $GLOBALS['TL_LANG']['tl_staff_member']['image_legend']       = 'Image settings';
-$GLOBALS['TL_LANG']['tl_staff_member']['table_legend']       = 'Specifications table';
 $GLOBALS['TL_LANG']['tl_staff_member']['description_legend'] = 'Description';
-$GLOBALS['TL_LANG']['tl_staff_member']['protected_legend']   = 'Access protection';
 $GLOBALS['TL_LANG']['tl_staff_member']['publish_legend']     = 'Publish setting';
 
 
@@ -58,7 +56,7 @@ $GLOBALS['TL_LANG']['tl_staff_member']['publish_legend']     = 'Publish setting'
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_staff_member']['new']    = array('New member', 'Create a new member');
-$GLOBALS['TL_LANG']['tl_staff_member']['show']   = array('Person details', 'Show the details of member ID %s');
+$GLOBALS['TL_LANG']['tl_staff_member']['show']   = array('Member details', 'Show the details of member ID %s');
 $GLOBALS['TL_LANG']['tl_staff_member']['edit']   = array('Edit member', 'Edit member ID %s');
 $GLOBALS['TL_LANG']['tl_staff_member']['cut']    = array('Move member', 'Move member ID %s');
 $GLOBALS['TL_LANG']['tl_staff_member']['copy']   = array('Duplicate member', 'Duplicate member ID %s');
@@ -69,8 +67,3 @@ $GLOBALS['TL_LANG']['tl_staff_member']['delete'] = array('Delete member', 'Delet
  */
 $GLOBALS['TL_LANG']['tl_staff_member']['sameDay']  = 'Same day';
 $GLOBALS['TL_LANG']['tl_staff_member']['otherDay'] = 'Other days';
-$GLOBALS['TL_LANG']['tl_staff_member']['mr']       = 'Mr.';
-$GLOBALS['TL_LANG']['tl_staff_member']['mrs']      = 'Mrs.';
-$GLOBALS['TL_LANG']['tl_staff_member']['dr']       = 'Dr.';
-$GLOBALS['TL_LANG']['tl_staff_member']['prof']     = 'Prof.';
-$GLOBALS['TL_LANG']['tl_staff_member']['msc']      = 'MSc.';

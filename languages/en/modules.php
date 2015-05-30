@@ -15,7 +15,7 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['staff'] = array('Members and staffs', 'Manage staff and members');
+$GLOBALS['TL_LANG']['MOD']['staff'] = array('Staff', 'Manage staff and members');
 
 
 /**
