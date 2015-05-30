@@ -45,12 +45,12 @@ $GLOBALS['TL_DCA']['tl_staff_member'] = array
 		'sorting' => array
 		(
 			'mode'                    => 1,
-			'fields'                  => array('family'),
+			'fields'                  => array('lastname'),
 			'flag'                    => 1
 		),
 		'label' => array
 		(
-			'fields'                  => array('name','family','post'),
+			'fields'                  => array('firstname','lastname','post'),
 			'format'                  => '%s %s - %s'
 		),
 		'global_operations' => array
