@@ -3,7 +3,7 @@
 <?php $this->block('content'); ?>
 
 
-  <?php echo $this->member; ?>
+  <?php echo $this->person; ?>
 
   <!-- indexer::stop -->
   <p class="back"><a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>"><?php echo $this->back; ?></a></p>

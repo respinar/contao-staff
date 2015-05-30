@@ -1,0 +1,15 @@
+
+<div class="layout_short block<?php echo $this->class; ?>">
+
+  <figure class="image_container">
+
+      <a href="<?php echo $this->link; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->firstname; ?> <?php echo $this->lastname; ?>">
+      <?php $this->insert('picture_default', $this->picture); ?>
+      </a>
+
+  </figure>
+
+
+  <div class="title"><a href="<?php echo $this->link; ?>"><?php echo $this->firstname; ?> <?php echo $this->lastname; ?></a></div>
+
+</div>

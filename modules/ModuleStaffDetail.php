@@ -59,7 +59,7 @@ class ModuleStaffDetail extends \ModuleStaff
 			\Input::setGet('items', \Input::get('auto_item'));
         }
 
-        $this->staffs = $this->sortOutProtected(deserialize($this->staffs));
+        $this->staff_categories = $this->sortOutProtected(deserialize($this->staff_categories));
 
 
 		return parent::generate();
@@ -74,16 +74,16 @@ class ModuleStaffDetail extends \ModuleStaff
 
 		global $objPage;
 
-		$this->Template->member = '';
+		$this->Template->person = '';
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$objPerson = \StaffMemberModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->staffs);
+		$objPerson = \StaffPersonModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->staff_categories);
 
 		// Overwrite the page title
 		if ($objPerson->title != '')
 		{
-			$objPage->pageTitle = strip_tags(strip_insert_tags($objPerson->title . ' ' .$objPerson->name));
+			$objPage->pageTitle = strip_tags(strip_insert_tags($objPerson->firstname . ' ' .$objPerson->lastname));
 		}
 
 		// Overwrite the page description
@@ -94,7 +94,7 @@ class ModuleStaffDetail extends \ModuleStaff
 
 		$arrPerson = $this->parsePerson($objPerson);
 
-		$this->Template->member = $arrPerson;
+		$this->Template->person = $arrPerson;
 
 	}
 }

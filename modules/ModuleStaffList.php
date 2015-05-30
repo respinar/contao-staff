@@ -53,10 +53,10 @@ class ModuleStaffList extends \ModuleStaff
 			return $objTemplate->parse();
 		}
 
-		$this->staffs = $this->sortOutProtected(deserialize($this->staffs));
+		$this->staff_categories = $this->sortOutProtected(deserialize($this->staff_categories));
 
-		// No staffs available
-		if (!is_array($this->staffs) || empty($this->staffs))
+		// No staff categories available
+		if (!is_array($this->staff_categories) || empty($this->staff_categories))
 		{
 			return '';
 		}
@@ -89,7 +89,7 @@ class ModuleStaffList extends \ModuleStaff
 		$this->Template->members = array();
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyStaff'];
 
-		$intTotal = \StaffMemberModel::countPublishedByPids($this->staffs);
+		$intTotal = \StaffPersonModel::countPublishedByPids($this->staff_categories);
 
 		if ($intTotal < 1)
 		{
@@ -143,11 +143,11 @@ class ModuleStaffList extends \ModuleStaff
 		// Get the items
 		if (isset($limit))
 		{
-			$objPersons = \StaffMemberModel::findPublishedByPids($this->staffs, null, $limit, $offset);
+			$objPersons = \StaffPersonModel::findPublishedByPids($this->staff_categories, null, $limit, $offset);
 		}
 		else
 		{
-			$objPersons = \StaffMemberModel::findPublishedByPids($this->staffs, null, 0, $offset);
+			$objPersons = \StaffPersonModel::findPublishedByPids($this->staff_categories, null, 0, $offset);
 		}
 
 

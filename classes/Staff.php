@@ -19,13 +19,13 @@ namespace department;
 
 
 /**
- * Class Department
+ * Class Staff
  *
- * @copyright  respinar 2014
+ * @copyright  2014-2015
  * @author     Hamid Abbaszadeh
- * @package    Devtools
+ * @package    Staff
  */
-class Department extends \Module
+class Staff extends \Module
 {
 
 	/**

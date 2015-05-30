@@ -40,16 +40,16 @@ abstract class ModuleStaff extends \Module
 	 * @param array
 	 * @return array
 	 */
-	protected function sortOutProtected($arrStaffs)
+	protected function sortOutProtected($arrStaffCategories)
 	{
-		if (BE_USER_LOGGED_IN || !is_array($arrStaffs) || empty($arrStaffs))
+		if (BE_USER_LOGGED_IN || !is_array($arrStaffCategories) || empty($arrStaffCategories))
 		{
-			return $arrStaffs;
+			return $arrStaffCategories;
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objStaff = \StaffModel::findMultipleByIds($arrStaffs);
-		$arrStaffs = array();
+		$objStaff = \StaffModel::findMultipleByIds($arrStaffCategories);
+		$arrStaffCategories = array();
 
 		if ($objStaff !== null)
 		{
@@ -70,11 +70,11 @@ abstract class ModuleStaff extends \Module
 					}
 				}
 
-				$arrStaffs[] = $objStaff->id;
+				$arrStaffCategories[] = $objStaff->id;
 			}
 		}
 
-		return $arrStaffs;
+		return $arrStaffCategories;
 	}
 
 
@@ -90,10 +90,10 @@ abstract class ModuleStaff extends \Module
 	{
 		global $objPage;
 
-		$objTemplate = new \FrontendTemplate($this->member_template);
+		$objTemplate = new \FrontendTemplate($this->person_template);
 		$objTemplate->setData($objPerson->row());
 
-		$objTemplate->class = (($this->member_class != '') ? ' ' . $this->member_class : '') . $strClass;
+		$objTemplate->class = (($this->person_class != '') ? ' ' . $this->person_class : '') . $strClass;
 
 		if (!empty($objPerson->education))
 		{

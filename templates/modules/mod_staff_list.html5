@@ -2,10 +2,10 @@
 
 <?php $this->block('content'); ?>
 
-  <?php if (empty($this->members)): ?>
+  <?php if (empty($this->persons)): ?>
     <p class="empty"><?php echo $this->empty; ?></p>
   <?php else: ?>
-    <?php echo implode('', $this->members); ?>
+    <?php echo implode('', $this->persons); ?>
     <?php echo $this->pagination; ?>
   <?php endif; ?>
 

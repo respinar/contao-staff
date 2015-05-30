@@ -18,20 +18,20 @@
 namespace staff;
 
 /**
- * Class ModuleStaffMember
+ * Class ModuleStaffPerson
  *
  * @copyright  respinar 2014
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class StaffMemberModel extends \Model
+class StaffPersonModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_staff_member';
+	protected static $strTable = 'tl_staff_person';
 
 	/**
 	 * Find published news items by their parent ID and ID or alias
@@ -101,7 +101,7 @@ class StaffMemberModel extends \Model
 
 		if (!isset($arrOptions['order']))
 		{
-			$arrOptions['order']  = "$t.date DESC";
+			//$arrOptions['order']  = "$t.date DESC";
 		}
 
 		$arrOptions['limit']  = $intLimit;

@@ -1,13 +1,8 @@
 
 <div class="layout_full block<?php echo $this->class; ?>">
 
-  <h2><?php echo $this->title; ?></h2>
-  <p class="model"><?php echo $this->model; ?></p>
-
-  <?php if ($this->hasMetaFields): ?>
-    <p class="info"><time datetime="<?php echo $this->datetime; ?>"><?php echo $this->date; ?></time></p>
-  <?php endif; ?>
-
+  <h2><?php echo $this->firstname; ?> <?php echo $this->lastname; ?></h2>
+  <p class="post"><?php echo $this->post; ?></p>
 
   <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?>>
 
@@ -27,44 +22,28 @@
 
   </figure>
 
-  <?php if($this->features !== null) { ?>
-  <div class="features">
-    <h3>ویژگی‌ها</h3>
+  <?php if($this->education !== null) { ?>
+  <div class="education">
+    <h3>مدارک</h3>
     <ul>
-      <?php foreach($this->features as $feature) { ?>
-        <li><?php echo $feature; ?></li>
+      <?php foreach($this->education as $edu) { ?>
+        <li><?php echo $edu; ?></li>
       <?php } ?>
     </ul>
   </div>
   <?php } ?>
 
-  <?php if($this->specs !== null) { ?>
-  <div class="specs">
-    <h3>خصوصیات</h3>
-    <ul>
-      <?php foreach($this->specs as $spec) { ?>
-        <li><?php echo $spec[spectitle]; ?>:<?php echo $spec[specvalue]; ?></li>
-      <?php } ?>
-    </ul>
+  <div class="contact">
+	  <ul>
+		  <?php if ($this->room): ?><li class="room"><?php echo $this->room; ?></li><?php endif; ?>
+		  <?php if ($this->phone): ?><li class="phone"><?php echo $this->phone; ?> (<?php echo $this->ext; ?>)</li><?php endif; ?>
+		  <?php if ($this->mobile): ?><li class="mobile"><?php echo $this->mobile; ?></li><?php endif; ?>
+		  <?php if ($this->fax): ?><li class="fax"><?php echo $this->fax; ?></li><?php endif; ?>
+		  <?php if ($this->email): ?><li class="email"><?php echo $this->email; ?></li><?php endif; ?>
+		  <?php if ($this->website): ?><li class="website"><a href="<?php echo $this->website; ?>"><?php echo $this->website; ?></a></li><?php endif; ?>
+
+	  </ul>
   </div>
-  <?php } ?>
-
-
-
-  <?php if ($this->text): ?>
-    <?php echo $this->text; ?>
-  <?php endif; ?>
-
-  <?php if ($this->types) {?>
-  <div class="types">
-	<h3>تیپ‌ها</h3>
-		<?php foreach($this->types as $type) { ?>
-			<div class="type <?php echo $this->typeClass; ?>">
-				<figure><?php echo $type[image]; ?></figure>
-			</div>
-		<?php } ?>
-	</div>
-  <?php } ?>
 
   <?php if ($this->enclosure): ?>
     <div class="enclosure">

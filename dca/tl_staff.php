@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_staff'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ctable'                      => array('tl_staff_member'),
+		'ctable'                      => array('tl_staff_person'),
 		'enableVersioning'            => true,
 		'sql' => array
 		(
@@ -63,7 +63,7 @@ $GLOBALS['TL_DCA']['tl_staff'] = array
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_staff']['edit'],
-				'href'                => 'table=tl_staff_member',
+				'href'                => 'table=tl_staff_person',
 				'icon'                => 'edit.gif'
 			),
 			'editheader' => array

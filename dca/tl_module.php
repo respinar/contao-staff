@@ -17,14 +17,14 @@
  */
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['staff_list'] = '{title_legend},name,headline,type;
-                                                                  {staff_legend},staffs;
+                                                                  {staff_legend},staff_categories;
                                                                   {config_legend},staff_detailModule,numberOfItems,perPage,skipFirst;
                                                                   {template_legend},member_template,customTpl;
                                                                   {member_legend},member_class,imgSize;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['staff_detail'] = '{title_legend},name,headline,type;
-                                                                  {departmets_legend},staffs;
+                                                                  {staff_legend},staff_categories;
                                                                   {image_legend},imgSize,fullsize;
                                                                   {template_legend:hide},member_template,customTpl;
                                                                   {protected_legend:hide},protected;
@@ -34,9 +34,9 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['staff_detail'] = '{title_legend},na
 /**
  * Add fields to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['fields']['staffs'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['staff_categories'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['staffs'],
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['staff_categories'],
 	'exclude'              => true,
 	'inputType'            => 'checkbox',
 	'options_callback'     => array('tl_module_staff', 'getStaffs'),
@@ -48,7 +48,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['member_template'] = array
 	'label'                => &$GLOBALS['TL_LANG']['tl_module']['member_template'],
 	'exclude'              => true,
 	'inputType'            => 'select',
-	'options_callback'     => array('tl_module_staff', 'getPersonTemplates'),
+	'options_callback'     => array('tl_module_staff', 'getMemberTemplates'),
 	'eval'                 => array('tl_class'=>'w50'),
     'sql'                  => "varchar(64) NOT NULL default ''"
 );
@@ -114,9 +114,9 @@ class tl_module_staff extends Backend
 	 * @param object
 	 * @return array
 	 */
-	public function getPersonTemplates(DataContainer $dc)
+	public function getMemberTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateStaff('member_', $dc->activeRecord->pid);
+		return $this->getTemplateGroup('member_', $dc->activeRecord->pid);
 	}
 
 	/**
