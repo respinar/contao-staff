@@ -15,11 +15,11 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_staff']['title']     = array('Staff Title', 'Please enter the staff title.');
+$GLOBALS['TL_LANG']['tl_staff']['title']     = array('Staff category title', 'Please enter the staff category title.');
 $GLOBALS['TL_LANG']['tl_staff']['jumpTo']    = array('Redirect page', 'Please choose the list page to which visitors will be redirected when clicking a menu.');
-$GLOBALS['TL_LANG']['tl_staff']['protected'] = array('Protect staff', 'Show staff items to certain member staffs only.');
-$GLOBALS['TL_LANG']['tl_staff']['staffs']    = array('Allowed member staffs', 'These staffs will be able to see the menu items in this catalog.');
-$GLOBALS['TL_LANG']['tl_staff']['master']    = array('Master staff', 'Please define the master staff to allow language switching.');
+$GLOBALS['TL_LANG']['tl_staff']['protected'] = array('Protect staff', 'Show staff category to certain member only.');
+$GLOBALS['TL_LANG']['tl_staff']['staffs']    = array('Allowed members', 'These staffs will be able to see the menu items in this category.');
+$GLOBALS['TL_LANG']['tl_staff']['master']    = array('Master staff category', 'Please define the master staff category to allow language switching.');
 $GLOBALS['TL_LANG']['tl_staff']['language']  = array('Language', 'Please enter the language according to the RFC3066 format (e.g. en, en-us or en-cockney).');
 
 
@@ -41,9 +41,9 @@ $GLOBALS['TL_LANG']['tl_staff']['protected_legend'] = 'Access protection';
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_staff']['new']    = array('New staff', 'Create a new staff');
-$GLOBALS['TL_LANG']['tl_staff']['show']   = array('Staff details', 'Show the details of staff ID %s');
-$GLOBALS['TL_LANG']['tl_staff']['edit']   = array('Edit staff', 'Edit staff ID %s');
-$GLOBALS['TL_LANG']['tl_staff']['cut']    = array('Move staff', 'Move staff ID %s');
-$GLOBALS['TL_LANG']['tl_staff']['copy']   = array('Duplicate staff', 'Duplicate staff ID %s');
-$GLOBALS['TL_LANG']['tl_staff']['delete'] = array('Delete staff', 'Delete staff ID %s');
+$GLOBALS['TL_LANG']['tl_staff']['new']    = array('New staff category', 'Add a new staff Category');
+$GLOBALS['TL_LANG']['tl_staff']['show']   = array('Staff category details', 'Show the details of staff category ID %s');
+$GLOBALS['TL_LANG']['tl_staff']['edit']   = array('Edit staff category', 'Edit staff category ID %s');
+$GLOBALS['TL_LANG']['tl_staff']['cut']    = array('Move staff category', 'Move staff category ID %s');
+$GLOBALS['TL_LANG']['tl_staff']['copy']   = array('Duplicate staff category', 'Duplicate staff category ID %s');
+$GLOBALS['TL_LANG']['tl_staff']['delete'] = array('Delete staff category', 'Delete staff category ID %s');

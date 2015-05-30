@@ -21,6 +21,6 @@ $GLOBALS['TL_LANG']['MOD']['staff'] = array('Staff', 'Manage staff and members')
 /**
  * Front end modules
  */
-$GLOBALS['TL_LANG']['FMD']['staff']        = array('', '');
-$GLOBALS['TL_LANG']['FMD']['staff_list']   = array('', '');
-$GLOBALS['TL_LANG']['FMD']['staff_detail'] = array('', '');
+$GLOBALS['TL_LANG']['FMD']['staff']        = array('Staff', '');
+$GLOBALS['TL_LANG']['FMD']['staff_list']   = array('Staff List', '');
+$GLOBALS['TL_LANG']['FMD']['staff_detail'] = array('Staff details', '');

@@ -15,10 +15,10 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['title'] = array('Title', 'Please enter the title.');
+
 
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_module']['title_legend'] = 'Title';
+
