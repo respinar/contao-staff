@@ -22,7 +22,6 @@ $GLOBALS['TL_LANG']['tl_staff_person']['membership']       = array('Date of memb
 $GLOBALS['TL_LANG']['tl_staff_person']['description']      = array('Description','Please enter description.');
 $GLOBALS['TL_LANG']['tl_staff_person']['education']        = array('Education','Please eneter the eduction.');
 $GLOBALS['TL_LANG']['tl_staff_person']['post']             = array('Post','Please enter the post.');
-$GLOBALS['TL_LANG']['tl_staff_person']['degree']           = array('Degree','Please enter the degree.');
 $GLOBALS['TL_LANG']['tl_staff_person']['floor']            = array('Floor number','Please enter the floor number.');
 $GLOBALS['TL_LANG']['tl_staff_person']['room']             = array('Room number','Please enter the room number.');
 $GLOBALS['TL_LANG']['tl_staff_person']['phone']            = array('Phone number','Please enter the phone number.');

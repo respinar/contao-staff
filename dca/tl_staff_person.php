@@ -182,14 +182,6 @@ $GLOBALS['TL_DCA']['tl_staff_person'] = array
 			'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feStaff'=>'personal', 'tl_class'=>'w50 wizard'),
 			'sql'                     => "varchar(11) NOT NULL default ''"
 		),
-		'degree' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_person']['degree'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
 		'education' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_person']['education'],
