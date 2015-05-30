@@ -97,7 +97,7 @@ $GLOBALS['TL_DCA']['tl_staff_person'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},firstname,lastname,alias;{employee_legend},post,membership;{education_legend},degree,education;{image_legend},singleSRC;{contact_legend},floor,room,phone,ext,mobile,fax,email,website;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
+		'default'                     => '{title_legend},firstname,lastname,alias;{employee_legend},post,membership;{education_legend},education;{image_legend},singleSRC;{contact_legend},floor,room,phone,ext,mobile,fax,email,website;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
 	),
 
 	// Subpalettes
