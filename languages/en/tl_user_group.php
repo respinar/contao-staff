@@ -8,11 +8,11 @@
  * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   LGPL-3.0+
- * @copyright respinar 2013-2015
+ * @copyright 2014-2015
  */
 
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_user_group']['staff_legend'] = 'Staff permissions';
+$GLOBALS['TL_LANG']['tl_user_group']['staff_legend'] = 'Staff categories permissions';

@@ -8,18 +8,18 @@
  * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   LGPL-3.0+
- * @copyright respinar 2013-2015
+ * @copyright 2014-2015
  */
 
 
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_user']['staffs'] = array('Allowed Staff', 'Here you can grant access to one or more Staff.');
-$GLOBALS['TL_LANG']['tl_user']['staffp'] = array('Staff permissions', 'Here you can define the Staff permissions.');
+$GLOBALS['TL_LANG']['tl_user']['staffs'] = array('Allowed Staff categories', 'Here you can grant access to one or more Staff categories.');
+$GLOBALS['TL_LANG']['tl_user']['staffp'] = array('Staff categories permissions', 'Here you can define the Staff categories permissions.');
 
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_user']['staff_legend']     = 'Staff permissions';
+$GLOBALS['TL_LANG']['tl_user']['staff_legend']     = 'Staff categories permissions';

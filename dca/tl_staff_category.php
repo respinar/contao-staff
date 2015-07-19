@@ -13,20 +13,20 @@
 
 
 /**
- * Table tl_staff
+ * Table tl_staff_category
  */
-$GLOBALS['TL_DCA']['tl_staff'] = array
+$GLOBALS['TL_DCA']['tl_staff_category'] = array
 (
 
 	// Config
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ctable'                      => array('tl_staff_member'),
+		'ctable'                      => array('tl_staff_employee'),
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
-			array('tl_staff', 'checkPermission')
+			array('tl_staff_category', 'checkPermission')
 		),
 		'sql' => array
 		(
@@ -66,35 +66,35 @@ $GLOBALS['TL_DCA']['tl_staff'] = array
 		(
 			'edit' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_staff']['edit'],
-				'href'                => 'table=tl_staff_member',
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff_category']['edit'],
+				'href'                => 'table=tl_staff_employee',
 				'icon'                => 'edit.gif'
 			),
 			'editheader' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_staff']['editheader'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff_category']['editheader'],
 				'href'                => 'act=edit',
 				'icon'                => 'header.gif',
-				'button_callback'     => array('tl_staff', 'editHeader')
+				'button_callback'     => array('tl_staff_category', 'editHeader')
 			),
 			'copy' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_staff']['copy'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff_category']['copy'],
 				'href'                => 'act=copy',
 				'icon'                => 'copy.gif',
-				'button_callback'     => array('tl_staff', 'copyCategory')
+				'button_callback'     => array('tl_staff_category', 'copyCategory')
 			),
 			'delete' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_staff']['delete'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff_category']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
-				'button_callback'     => array('tl_staff', 'deleteCategory')
+				'button_callback'     => array('tl_staff_category', 'deleteCategory')
 			),
 			'show' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_staff']['show'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff_category']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
 			)
@@ -111,7 +111,7 @@ $GLOBALS['TL_DCA']['tl_staff'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'protected'                   => 'staffs'
+		'protected'                   => 'groups'
 	),
 
 	// Fields
@@ -127,7 +127,7 @@ $GLOBALS['TL_DCA']['tl_staff'] = array
 		),
 		'title' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff']['title'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_category']['title'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
@@ -135,7 +135,7 @@ $GLOBALS['TL_DCA']['tl_staff'] = array
 		),
 		'language' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff']['language'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_category']['language'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'filter'                  => true,
@@ -145,16 +145,16 @@ $GLOBALS['TL_DCA']['tl_staff'] = array
 		),
 		'master' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff']['master'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_category']['master'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_staff', 'getStaffs'),
-			'eval'                    => array('includeBlankOption'=>true, 'blankOptionLabel'=>&$GLOBALS['TL_LANG']['tl_staff']['isMaster']),
+			'options_callback'        => array('tl_staff_category', 'getStaffs'),
+			'eval'                    => array('includeBlankOption'=>true, 'blankOptionLabel'=>&$GLOBALS['TL_LANG']['tl_staff_category']['isMaster']),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'jumpTo' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff']['jumpTo'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_category']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
@@ -164,18 +164,18 @@ $GLOBALS['TL_DCA']['tl_staff'] = array
 		),
 		'protected' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff']['protected'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_category']['protected'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
-		'staffs' => array
+		'groups' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff']['staffs'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_category']['groups'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'foreignKey'              => 'tl_staff.title',
+			'foreignKey'              => 'tl_member_group.title',
 			'eval'                    => array('mandatory'=>true, 'multiple'=>true),
 			'sql'                     => "blob NULL",
 			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
@@ -183,7 +183,7 @@ $GLOBALS['TL_DCA']['tl_staff'] = array
 	)
 );
 
-class tl_staff extends Backend
+class tl_staff_category extends Backend
 {
 
 	/**
@@ -197,7 +197,7 @@ class tl_staff extends Backend
 
 
 	/**
-	 * Check permissions to edit table tl_staff
+	 * Check permissions to edit table tl_staff_category
 	 */
 	public function checkPermission()
 	{
@@ -217,12 +217,12 @@ class tl_staff extends Backend
 			$root = $this->User->staffs;
 		}
 
-		$GLOBALS['TL_DCA']['tl_staff']['list']['sorting']['root'] = $root;
+		$GLOBALS['TL_DCA']['tl_staff_category']['list']['sorting']['root'] = $root;
 
 		// Check permissions to add Staff
 		if (!$this->User->hasAccess('create', 'staffp'))
 		{
-			$GLOBALS['TL_DCA']['tl_staff']['config']['closed'] = true;
+			$GLOBALS['TL_DCA']['tl_staff_category']['config']['closed'] = true;
 		}
 
 		// Check current action
@@ -239,7 +239,7 @@ class tl_staff extends Backend
 				{
 					$arrNew = $this->Session->get('new_records');
 
-					if (is_array($arrNew['tl_staff']) && in_array(Input::get('id'), $arrNew['tl_staff']))
+					if (is_array($arrNew['tl_staff_category']) && in_array(Input::get('id'), $arrNew['tl_staff_category']))
 					{
 						// Add permissions on user level
 						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
@@ -336,7 +336,7 @@ class tl_staff extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		return $this->User->canEditFieldsOf('tl_staff') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->canEditFieldsOf('tl_staff_category') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -389,7 +389,7 @@ class tl_staff extends Backend
 
 		while( $objStaffs->next() )
 		{
-			$arrStaffs[$objStaffs->id] = sprintf($GLOBALS['TL_LANG']['tl_staff']['isSlave'], $objStaffs->title);
+			$arrStaffs[$objStaffs->id] = sprintf($GLOBALS['TL_LANG']['tl_staff_category']['isSlave'], $objStaffs->title);
 		}
 
 		return $arrStaffs;

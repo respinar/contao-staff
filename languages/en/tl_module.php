@@ -15,14 +15,14 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['staff_categories']   = array('Staff categories','');
-$GLOBALS['TL_LANG']['tl_module']['staff_detailModule'] = array('Staff detail module','');
-$GLOBALS['TL_LANG']['tl_module']['person_template']    = array('Person template','');
-$GLOBALS['TL_LANG']['tl_module']['person_class']       = array('Person CSS class','');
+$GLOBALS['TL_LANG']['tl_module']['staffs']                  = array('Staff categories','');
+$GLOBALS['TL_LANG']['tl_module']['staff_detailModule']      = array('Staff detail module','');
+$GLOBALS['TL_LANG']['tl_module']['staff_employee_template'] = array('Employee template','');
+$GLOBALS['TL_LANG']['tl_module']['staff_employee_class']    = array('Employee CSS class','');
 
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_module']['staff_legend']  = 'Staff settings';
-$GLOBALS['TL_LANG']['tl_module']['person_legend'] = 'Person settings';
+$GLOBALS['TL_LANG']['tl_module']['staff_legend']          = 'Staff settings';
+$GLOBALS['TL_LANG']['tl_module']['staff_employee_legend'] = 'Employee settings';

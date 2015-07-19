@@ -48,7 +48,7 @@ abstract class ModuleStaff extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objStaff = \StaffModel::findMultipleByIds($arrStaffCategories);
+		$objStaff = \StaffCategoryModel::findMultipleByIds($arrStaffCategories);
 		$arrStaffCategories = array();
 
 		if ($objStaff !== null)

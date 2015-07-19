@@ -24,13 +24,13 @@ namespace staff;
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class StaffModel extends \Model
+class StaffCategoryModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_staff';
+	protected static $strTable = 'tl_staff_category';
 
 }
