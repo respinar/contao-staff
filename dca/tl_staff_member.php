@@ -26,6 +26,7 @@ $GLOBALS['TL_DCA']['tl_staff_member'] = array
 		'enableVersioning'            => true,
 		'onload_callback'             => array
 		(
+			array('tl_staff_member', 'checkPermission'),
 			array('tl_staff_member', 'showSelectbox'),
 		),
 		'sql' => array
@@ -83,6 +84,13 @@ $GLOBALS['TL_DCA']['tl_staff_member'] = array
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
+			),
+			'toggle' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff_member']['toggle'],
+				'icon'                => 'visible.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+				'button_callback'     => array('tl_staff_member', 'toggleIcon')
 			),
 			'show' => array
 			(
@@ -322,6 +330,124 @@ class tl_staff_member extends Backend
 {
 
 	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
+
+	/**
+	 * Check permissions to edit table tl_staff_member
+	 */
+	public function checkPermission()
+	{
+		if ($this->User->isAdmin)
+		{
+			return;
+		}
+
+		// Set the root IDs
+		if (!is_array($this->User->staffs) || empty($this->User->staffs))
+		{
+			$root = array(0);
+		}
+		else
+		{
+			$root = $this->User->staffs;
+		}
+
+		$id = strlen(Input::get('id')) ? Input::get('id') : CURRENT_ID;
+
+		// Check current action
+		switch (Input::get('act'))
+		{
+			case 'paste':
+				// Allow
+				break;
+
+			case 'create':
+				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
+				{
+					$this->log('Not enough permissions to create member in staff ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+				break;
+
+			case 'cut':
+			case 'copy':
+				if (!in_array(Input::get('pid'), $root))
+				{
+					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" to staff ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+				// NO BREAK STATEMENT HERE
+
+			case 'edit':
+			case 'show':
+			case 'delete':
+			case 'toggle':
+			case 'feature':
+				$objArchive = $this->Database->prepare("SELECT pid FROM tl_staff_member WHERE id=?")
+											 ->limit(1)
+											 ->execute($id);
+
+				if ($objArchive->numRows < 1)
+				{
+					$this->log('Invalid news item ID "'.$id.'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+
+				if (!in_array($objArchive->pid, $root))
+				{
+					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" of staff ID "'.$objArchive->pid.'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+				break;
+
+			case 'select':
+			case 'editAll':
+			case 'deleteAll':
+			case 'overrideAll':
+			case 'cutAll':
+			case 'copyAll':
+				if (!in_array($id, $root))
+				{
+					$this->log('Not enough permissions to access staff ID "'.$id.'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+
+				$objArchive = $this->Database->prepare("SELECT id FROM tl_staff_member WHERE pid=?")
+											 ->execute($id);
+
+				if ($objArchive->numRows < 1)
+				{
+					$this->log('Invalid staff ID "'.$id.'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+
+				$session = $this->Session->getData();
+				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $objArchive->fetchEach('id'));
+				$this->Session->setData($session);
+				break;
+
+			default:
+				if (strlen(Input::get('act')))
+				{
+					$this->log('Invalid command "'.Input::get('act').'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+				elseif (!in_array($id, $root))
+				{
+					$this->log('Not enough permissions to access staff ID ' . $id, __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+				break;
+		}
+	}
+
+	/**
 	 * Auto-generate the product alias if it has not been set yet
 	 * @param mixed
 	 * @param \DataContainer
@@ -342,7 +468,7 @@ class tl_staff_member extends Backend
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_staff_member WHERE alias=?")
 								   ->execute($varValue);
 
-		// Check whether the news alias exists
+		// Check whether the member alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)
 		{
 			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
@@ -355,65 +481,6 @@ class tl_staff_member extends Backend
 		}
 
 		return $varValue;
-	}
-
-	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
-	{
-		if (strlen($this->Input->get('tid')))
-		{
-			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
-			$this->redirect($this->getReferer());
-		}
-
-		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		//if (!$this->User->isAdmin && !$this->User->hasAccess('tl_prices::published', 'alexf'))
-		//{
-		//	return '';
-		//}
-
-		$href .= '&amp;tid='.$row['id'].'&amp;state='.($row['published'] ? '' : 1);
-
-		if (!$row['published'])
-		{
-			$icon = 'invisible.gif';
-		}
-
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
-	}
-
-
-	public function toggleVisibility($intId, $blnVisible)
-	{
-		// Check permissions to edit
-		$this->Input->setGet('id', $intId);
-		$this->Input->setGet('act', 'toggle');
-		//$this->checkPermission();
-
-		// Check permissions to publish
-		//if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::published', 'alexf'))
-		//{
-		//	$this->log('Not enough permissions to publish/unpublish news item ID "'.$intId.'"', 'tl_news toggleVisibility', TL_ERROR);
-		//	$this->redirect('contao/main.php?act=error');
-		//}
-
-		$this->createInitialVersion('tl_staff_member', $intId);
-
-		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_staff_member']['fields']['published']['save_callback']))
-		{
-			foreach ($GLOBALS['TL_DCA']['tl_staff_member']['fields']['published']['save_callback'] as $callback)
-			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
-			}
-		}
-
-		// Update the database
-		$this->Database->prepare("UPDATE tl_staff_member SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
-					   ->execute($intId);
-
-		$this->createNewVersion('tl_staff_member', $intId);
-
 	}
 
 
@@ -474,6 +541,94 @@ class tl_staff_member extends Backend
 		{
 			$GLOBALS['TL_DCA']['tl_staff_member']['palettes']['regular'] = preg_replace('@([,|;]{1}language)([,|;]{1})@','$1,languageMain$2', $GLOBALS['TL_DCA']['tl_staff_member']['palettes']['regular']);
 		}
+	}
+	
+
+	/**
+	 * Return the "toggle visibility" button
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
+	 * @return string
+	 */
+	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen(Input::get('tid')))
+		{
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
+			$this->redirect($this->getReferer());
+		}
+
+		// Check permissions AFTER checking the tid, so hacking attempts are logged
+		if (!$this->User->hasAccess('tl_staff_member::published', 'alexf'))
+		{
+			return '';
+		}
+
+		$href .= '&amp;tid='.$row['id'].'&amp;state='.($row['published'] ? '' : 1);
+
+		if (!$row['published'])
+		{
+			$icon = 'invisible.gif';
+		}
+
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Disable/enable a user group
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
+	 */
+	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
+	{
+		// Check permissions to edit
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
+		$this->checkPermission();
+
+		// Check permissions to publish
+		if (!$this->User->hasAccess('tl_staff_member::published', 'alexf'))
+		{
+			$this->log('Not enough permissions to publish/unpublish member ID "'.$intId.'"', __METHOD__, TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
+		$objVersions = new Versions('tl_staff_member', $intId);
+		$objVersions->initialize();
+
+		// Trigger the save_callback
+		if (is_array($GLOBALS['TL_DCA']['tl_staff_member']['fields']['published']['save_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA']['tl_staff_member']['fields']['published']['save_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, ($dc ?: $this));
+				}
+			}
+		}
+
+		// Update the database
+		$this->Database->prepare("UPDATE tl_staff_member SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
+					   ->execute($intId);
+
+		$objVersions->create();
+		$this->log('A new version of record "tl_staff_member.id='.$intId.'" has been created'.$this->getParentEntries('tl_staff_member', $intId), __METHOD__, TL_GENERAL);
+
 	}
 
 

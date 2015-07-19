@@ -36,3 +36,10 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 		'staff_detail'  => 'ModuleStaffDetail'
 	)
 ));
+
+
+/**
+ * Add permissions
+ */
+$GLOBALS['TL_PERMISSIONS'][] = 'staffs';
+$GLOBALS['TL_PERMISSIONS'][] = 'staffp';
