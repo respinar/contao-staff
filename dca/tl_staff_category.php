@@ -148,7 +148,7 @@ $GLOBALS['TL_DCA']['tl_staff_category'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_category']['master'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_staff_category', 'getStaffs'),
+			'options_callback'        => array('tl_staff_category', 'getStaffCategories'),
 			'eval'                    => array('includeBlankOption'=>true, 'blankOptionLabel'=>&$GLOBALS['TL_LANG']['tl_staff_category']['isMaster']),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
@@ -382,16 +382,16 @@ class tl_staff_category extends Backend
 	 * @return	array
 	 * @link	http://www.contao.org/callbacks.html#options_callback
 	 */
-	public function getStaffs(DataContainer $dc)
+	public function getStaffCategories(DataContainer $dc)
 	{
-		$arrStaffs = array();
-		$objStaffs = $this->Database->prepare("SELECT * FROM tl_staff WHERE language!=? AND id!=? AND master=0 ORDER BY title")->execute($dc->activeRecord->language, $dc->id);
+		$arrStaffCategories = array();
+		$objStaffCategories = $this->Database->prepare("SELECT * FROM tl_staff_category WHERE language!=? AND id!=? AND master=0 ORDER BY title")->execute($dc->activeRecord->language, $dc->id);
 
-		while( $objStaffs->next() )
+		while( $objStaffCategories->next() )
 		{
-			$arrStaffs[$objStaffs->id] = sprintf($GLOBALS['TL_LANG']['tl_staff_category']['isSlave'], $objStaffs->title);
+			$arrStaffCategories[$objStaffCategories->id] = sprintf($GLOBALS['TL_LANG']['tl_staff_category']['isSlave'], $objStaffCategories->title);
 		}
 
-		return $arrStaffs;
+		return $arrStaffCategories;
 	}
 }
