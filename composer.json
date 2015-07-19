@@ -1,7 +1,7 @@
 {
     "name": "respinar/contao-staff",
     "description": "Staff for Contao",
-    "keywords": ["contao", "department", "staff", "members", "faculty", "group"],
+    "keywords": ["contao", "department", "staff", "members", "group"],
     "type": "contao-module",
     "homepage": "https://github.com/respinar/contao-staff",
     "license": "LGPL-3.0+",
@@ -39,4 +39,3 @@
         }
     }
 }
-

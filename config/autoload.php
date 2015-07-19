@@ -33,7 +33,7 @@ ClassLoader::addClasses(array
 
 	// Models
 	'staff\StaffModel'        => 'system/modules/staff/models/StaffModel.php',
-	'staff\StaffPersonModel'  => 'system/modules/staff/models/StaffPersonModel.php',
+	'staff\StaffMemberModel'  => 'system/modules/staff/models/StaffMemberModel.php',
 ));
 
 
@@ -44,6 +44,6 @@ TemplateLoader::addFiles(array
 (
 	'mod_staff_detail' => 'system/modules/staff/templates/modules',
 	'mod_staff_list'   => 'system/modules/staff/templates/modules',
-	'person_full'      => 'system/modules/staff/templates/person',
-	'person_short'     => 'system/modules/staff/templates/person',
+	'member_full'      => 'system/modules/staff/templates/member',
+	'member_short'     => 'system/modules/staff/templates/member',
 ));

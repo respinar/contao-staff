@@ -78,7 +78,7 @@ class ModuleStaffDetail extends \ModuleStaff
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$objPerson = \StaffPersonModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->staff_categories);
+		$objPerson = \StaffMemberModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->staff_categories);
 
 		// Overwrite the page title
 		if ($objPerson->title != '')

@@ -19,7 +19,7 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 (
 	'staff' => array
 	(
-		'tables'     => array('tl_staff','tl_staff_person'),
+		'tables'     => array('tl_staff','tl_staff_member'),
 		'icon'       => 'system/modules/staff/assets/icon.png',
 	)
 ));

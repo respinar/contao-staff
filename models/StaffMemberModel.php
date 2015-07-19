@@ -24,14 +24,14 @@ namespace staff;
  * @author     Hamid Abbaszadeh
  * @package    Devtools
  */
-class StaffPersonModel extends \Model
+class StaffMemberModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_staff_person';
+	protected static $strTable = 'tl_staff_member';
 
 	/**
 	 * Find published news items by their parent ID and ID or alias
