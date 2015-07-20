@@ -89,7 +89,7 @@ class ModuleStaffList extends \ModuleStaff
 		$this->Template->persons = array();
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyStaff'];
 
-		$intTotal = \StaffMemberModel::countPublishedByPids($this->staff_categories);
+		$intTotal = \StaffEmployeeModel::countPublishedByPids($this->staff_categories);
 
 		if ($intTotal < 1)
 		{
@@ -143,11 +143,11 @@ class ModuleStaffList extends \ModuleStaff
 		// Get the items
 		if (isset($limit))
 		{
-			$objPersons = \StaffMemberModel::findPublishedByPids($this->staff_categories, null, $limit, $offset);
+			$objPersons = \StaffEmployeeModel::findPublishedByPids($this->staff_categories, null, $limit, $offset);
 		}
 		else
 		{
-			$objPersons = \StaffMemberModel::findPublishedByPids($this->staff_categories, null, 0, $offset);
+			$objPersons = \StaffEmployeeModel::findPublishedByPids($this->staff_categories, null, 0, $offset);
 		}
 
 

@@ -25,8 +25,8 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['staff_list'] = '{title_legend},name
                                                                   {expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['staff_detail'] = '{title_legend},name,headline,type;
                                                                   {staff_legend},staff_categories;
-                                                                  {image_legend},imgSize,fullsize;
                                                                   {template_legend:hide},staff_employee_template,customTpl;
+                                                                  {image_legend},imgSize,fullsize;
                                                                   {protected_legend:hide},protected;
                                                                   {expert_legend:hide},guests,cssID,space';
 
@@ -56,7 +56,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['staff_detailModule'] = array
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['staff_employee_template'] = array
 (
-	'label'                => &$GLOBALS['TL_LANG']['tl_module']['staff_emplyee_template'],
+	'label'                => &$GLOBALS['TL_LANG']['tl_module']['staff_employee_template'],
 	'exclude'              => true,
 	'inputType'            => 'select',
 	'options_callback'     => array('tl_module_staff', 'getEmployeeTemplates'),
@@ -86,30 +86,41 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['fullsize']['eval']['tl_class'] = 'w50
 class tl_module_staff extends Backend
 {
 
-	/**
-	 * Get all news archives and return them as array
-	 * @return array
-	 */
-	public function getStaffCategories()
-	{
-		//if (!$this->User->isAdmin && !is_array($this->User->news))
-		//{
-		//	return array();
-		//}
+    /**
+     * Import the back end user object
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->import('BackendUser', 'User');
+    }
 
-		$arrStaffCategories = array();
-		$objStaffCategories = $this->Database->execute("SELECT id, title FROM tl_staff_category ORDER BY title");
 
-		while ($objStaffCategories->next())
-		{
-			//if ($this->User->hasAccess($objArchives->id, 'news'))
-			//{
-				$arrStaffCategories[$objStaffCategories->id] = $objStaffCategories->title;
-			//}
-		}
+    /**
+     * Get all staff categories and return them as array
+     *
+     * @return array
+     */
+    public function getStaffCategories()
+    {
+        if (!$this->User->isAdmin && !is_array($this->User->staffs))
+        {
+            return array();
+        }
 
-		return $arrStaffs;
-	}
+        $arrCategories = array();
+        $objCategories = $this->Database->execute("SELECT id, title FROM tl_staff_category ORDER BY title");
+
+        while ($objCategories->next())
+        {
+            if ($this->User->hasAccess($objCategories->id, 'news'))
+            {
+                $arrCategories[$objCategories->id] = $objCategories->title;
+            }
+        }
+
+        return $arrCategories;
+    }
 
 	/**
 	 * Return all prices templates as array
