@@ -8,7 +8,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-19T22:30:20+04:30
+ * last-updated: 2015-07-20T11:18:55+04:30
  */
 
 $GLOBALS['TL_LANG']['tl_staff_category']['copy']['0']        = 'تکثیر دسته‌بندی کارمندان';
@@ -21,6 +21,7 @@ $GLOBALS['TL_LANG']['tl_staff_category']['edit']['0']        = 'ویرایش د�
 $GLOBALS['TL_LANG']['tl_staff_category']['edit']['1']        = 'ویرایش دسته‌بندی کارمندان شناسه‌ی %s';
 $GLOBALS['TL_LANG']['tl_staff_category']['editheader']['0']  = 'ویرایش تنظیمات دسته‌بندی کارمندان';
 $GLOBALS['TL_LANG']['tl_staff_category']['editheader']['1']  = 'ویرایش تنظیمات دسته‌بندی کارمندان شناسه‌ی %s';
+$GLOBALS['TL_LANG']['tl_staff_category']['groups']['0']      = 'گروه‌های اعضاء مجاز';
 $GLOBALS['TL_LANG']['tl_staff_category']['isMaster']         = 'این دسته‌بندی کارمندان اصلی است';
 $GLOBALS['TL_LANG']['tl_staff_category']['isSlave']          = 'دسته‌بندی کارمندان اصلی "%s" هست';
 $GLOBALS['TL_LANG']['tl_staff_category']['jumpTo']['0']      = 'برگه بازگردانی';
@@ -29,6 +30,7 @@ $GLOBALS['TL_LANG']['tl_staff_category']['master']['0']      = 'دسته‌بن�
 $GLOBALS['TL_LANG']['tl_staff_category']['new']['0']         = 'دسته‌بندی کارمندان جدید';
 $GLOBALS['TL_LANG']['tl_staff_category']['new']['1']         = 'افزودن دسته‌بندی کارمندان جدید';
 $GLOBALS['TL_LANG']['tl_staff_category']['protected']['0']   = 'حفاظت از دسته‌بندی کارمندان';
+$GLOBALS['TL_LANG']['tl_staff_category']['protected']['1']   = 'نمایش کارمندان به گروه خاص اعضاء.';
 $GLOBALS['TL_LANG']['tl_staff_category']['protected_legend'] = 'حفاظت دسترسی';
 $GLOBALS['TL_LANG']['tl_staff_category']['redirect_legend']  = 'بازگردانی';
 $GLOBALS['TL_LANG']['tl_staff_category']['show']['0']        = 'جزئیات دسته‌بندی کارمندان';
