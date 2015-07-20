@@ -8,7 +8,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-19T22:06:06+04:30
+ * last-updated: 2015-07-19T22:30:20+04:30
  */
 
 $GLOBALS['TL_LANG']['tl_staff_category']['copy']['0']        = 'تکثیر دسته‌بندی کارمندان';
@@ -19,6 +19,8 @@ $GLOBALS['TL_LANG']['tl_staff_category']['delete']['0']      = 'حذف دسته�
 $GLOBALS['TL_LANG']['tl_staff_category']['delete']['1']      = 'حذف دسته‌بندی کارمندان شناسه‌ی %s';
 $GLOBALS['TL_LANG']['tl_staff_category']['edit']['0']        = 'ویرایش دسته‌بندی کارمندان';
 $GLOBALS['TL_LANG']['tl_staff_category']['edit']['1']        = 'ویرایش دسته‌بندی کارمندان شناسه‌ی %s';
+$GLOBALS['TL_LANG']['tl_staff_category']['editheader']['0']  = 'ویرایش تنظیمات دسته‌بندی کارمندان';
+$GLOBALS['TL_LANG']['tl_staff_category']['editheader']['1']  = 'ویرایش تنظیمات دسته‌بندی کارمندان شناسه‌ی %s';
 $GLOBALS['TL_LANG']['tl_staff_category']['isMaster']         = 'این دسته‌بندی کارمندان اصلی است';
 $GLOBALS['TL_LANG']['tl_staff_category']['isSlave']          = 'دسته‌بندی کارمندان اصلی "%s" هست';
 $GLOBALS['TL_LANG']['tl_staff_category']['jumpTo']['0']      = 'برگه بازگردانی';

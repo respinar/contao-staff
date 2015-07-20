@@ -8,7 +8,7 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-19T22:52:42+04:30
+ * last-updated: 2015-07-19T23:00:23+04:30
  */
 
 $GLOBALS['TL_LANG']['tl_staff_employee']['addEnclosure']['0']  = 'افزودن پیوست‌ها';
@@ -23,19 +23,24 @@ $GLOBALS['TL_LANG']['tl_staff_employee']['degree']['0']        = 'رتبه';
 $GLOBALS['TL_LANG']['tl_staff_employee']['delete']['0']        = 'حذف کارمند';
 $GLOBALS['TL_LANG']['tl_staff_employee']['delete']['1']        = 'حذف کارمند شناسه‌ی %s';
 $GLOBALS['TL_LANG']['tl_staff_employee']['description']['0']   = 'توضیحات';
+$GLOBALS['TL_LANG']['tl_staff_employee']['description']['1']   = 'لطفا توضیحات را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_staff_employee']['description_legend'] = 'توضیحات';
 $GLOBALS['TL_LANG']['tl_staff_employee']['edit']['0']          = 'ویرای کارمند';
 $GLOBALS['TL_LANG']['tl_staff_employee']['edit']['1']          = 'ویرایش کارمند شناسه‌ی %s';
 $GLOBALS['TL_LANG']['tl_staff_employee']['education']['0']     = 'تحصیلات';
+$GLOBALS['TL_LANG']['tl_staff_employee']['education']['1']     = 'لطفا تحصیلات را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_staff_employee']['education_legend']   = 'جزئیات تحصیلات';
 $GLOBALS['TL_LANG']['tl_staff_employee']['email']['0']         = 'نشانی پست الکترونیکی';
+$GLOBALS['TL_LANG']['tl_staff_employee']['email']['1']         = 'لطفا نشانی ایمیل معتبری را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_staff_employee']['employee_legend']    = 'عضویت و استخدام';
 $GLOBALS['TL_LANG']['tl_staff_employee']['employment']['0']    = 'تاریخ استخدام یا عضویت';
 $GLOBALS['TL_LANG']['tl_staff_employee']['employment']['1']    = 'لطفا تاریخ را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_staff_employee']['enclosure']['0']     = 'پیوست‌ها';
 $GLOBALS['TL_LANG']['tl_staff_employee']['enclosure_legend']   = 'پیوست‌ها';
 $GLOBALS['TL_LANG']['tl_staff_employee']['ext']['0']           = 'شماره داخلی';
+$GLOBALS['TL_LANG']['tl_staff_employee']['ext']['1']           = 'لطفا شماره تلفن داخلی را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_staff_employee']['fax']['0']           = 'شماره فکس';
+$GLOBALS['TL_LANG']['tl_staff_employee']['fax']['1']           = 'لطفا شماره فکس را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_staff_employee']['firstname']['0']     = 'نام';
 $GLOBALS['TL_LANG']['tl_staff_employee']['firstname']['1']     = 'لطفا نام را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_staff_employee']['floor']['0']         = 'شماره طبقه';
@@ -45,12 +50,14 @@ $GLOBALS['TL_LANG']['tl_staff_employee']['languageMain']['0']  = 'کارمند �
 $GLOBALS['TL_LANG']['tl_staff_employee']['lastname']['0']      = 'نام خانوادگی';
 $GLOBALS['TL_LANG']['tl_staff_employee']['lastname']['1']      = 'لطفا نام خانوادگی را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_staff_employee']['mobile']['0']        = 'شماره موبایل';
+$GLOBALS['TL_LANG']['tl_staff_employee']['mobile']['1']        = 'لطفا شماره موبایل را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_staff_employee']['new']['0']           = 'افزودن کارمند';
 $GLOBALS['TL_LANG']['tl_staff_employee']['new']['1']           = 'افزودن کارمند جدید';
 $GLOBALS['TL_LANG']['tl_staff_employee']['otherDay']           = 'روزهای دیگر';
 $GLOBALS['TL_LANG']['tl_staff_employee']['phone']['0']         = 'شماره تلفن';
 $GLOBALS['TL_LANG']['tl_staff_employee']['phone']['1']         = 'لطفا شماره تلفن را وارد نمایید.';
-$GLOBALS['TL_LANG']['tl_staff_employee']['post']['0']          = 'پست';
+$GLOBALS['TL_LANG']['tl_staff_employee']['post']['0']          = 'موقعیت شغلی';
+$GLOBALS['TL_LANG']['tl_staff_employee']['post']['1']          = 'لطفا موقعیت شغلی را وارد نمایید.';
 $GLOBALS['TL_LANG']['tl_staff_employee']['publish_legend']     = 'تنظیمات انتشار';
 $GLOBALS['TL_LANG']['tl_staff_employee']['published']['0']     = 'انتشار کارمند';
 $GLOBALS['TL_LANG']['tl_staff_employee']['room']['0']          = 'شماره اتاق';
@@ -59,8 +66,12 @@ $GLOBALS['TL_LANG']['tl_staff_employee']['sameDay']            = 'همان رو�
 $GLOBALS['TL_LANG']['tl_staff_employee']['show']['0']          = 'جزئیات شخص';
 $GLOBALS['TL_LANG']['tl_staff_employee']['show']['1']          = 'نمایش جزئیات کارمند شناسه‌ی %s';
 $GLOBALS['TL_LANG']['tl_staff_employee']['singleSRC']['0']     = 'پرونده منبع';
+$GLOBALS['TL_LANG']['tl_staff_employee']['singleSRC']['1']     = 'لطفا یک تصویر انتخاب نمایید.';
 $GLOBALS['TL_LANG']['tl_staff_employee']['start']['0']         = 'نمایش از';
 $GLOBALS['TL_LANG']['tl_staff_employee']['stop']['0']          = 'نمایش تا';
 $GLOBALS['TL_LANG']['tl_staff_employee']['title_legend']       = 'اطلاعات شخص';
+$GLOBALS['TL_LANG']['tl_staff_employee']['toggle']['0']        = 'انتشار/لغو انتشار کارمند';
+$GLOBALS['TL_LANG']['tl_staff_employee']['toggle']['1']        = 'انتشار/لغو انتشار کارمند شناسه‌ی %s';
 $GLOBALS['TL_LANG']['tl_staff_employee']['website']['0']       = 'نشانی وب‌سایت';
+$GLOBALS['TL_LANG']['tl_staff_employee']['website']['1']       = 'اینجا می‌توانید اطلاعات یک نشانی وب را وارد نمایید.';
 

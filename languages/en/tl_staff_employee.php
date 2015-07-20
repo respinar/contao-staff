@@ -60,6 +60,7 @@ $GLOBALS['TL_LANG']['tl_staff_employee']['edit']   = array('Edit employee', 'Edi
 $GLOBALS['TL_LANG']['tl_staff_employee']['cut']    = array('Move employee', 'Move employee ID %s');
 $GLOBALS['TL_LANG']['tl_staff_employee']['copy']   = array('Duplicate employee', 'Duplicate employee ID %s');
 $GLOBALS['TL_LANG']['tl_staff_employee']['delete'] = array('Delete employee', 'Delete employee ID %s');
+$GLOBALS['TL_LANG']['tl_staff_employee']['toggle'] = array('Publish/unpublish employee', 'Publish/unpublish employee ID %s');
 
 /**
  * References

@@ -41,8 +41,9 @@ $GLOBALS['TL_LANG']['tl_staff_category']['protected_legend'] = 'Access protectio
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_staff_category']['new']    = array('New staff category', 'Add a new staff category');
-$GLOBALS['TL_LANG']['tl_staff_category']['show']   = array('Staff category details', 'Show the details of staff category ID %s');
-$GLOBALS['TL_LANG']['tl_staff_category']['edit']   = array('Edit staff category', 'Edit staff category ID %s');
-$GLOBALS['TL_LANG']['tl_staff_category']['copy']   = array('Duplicate staff category', 'Duplicate staff category ID %s');
-$GLOBALS['TL_LANG']['tl_staff_category']['delete'] = array('Delete staff category', 'Delete staff category ID %s');
+$GLOBALS['TL_LANG']['tl_staff_category']['new']        = array('New staff category', 'Add a new staff category');
+$GLOBALS['TL_LANG']['tl_staff_category']['show']       = array('Staff category details', 'Show the details of staff category ID %s');
+$GLOBALS['TL_LANG']['tl_staff_category']['edit']       = array('Edit staff category', 'Edit staff category ID %s');
+$GLOBALS['TL_LANG']['tl_staff_category']['editheader'] = array('Edit staff category settings', 'Edit the settings of staff category ID %s');
+$GLOBALS['TL_LANG']['tl_staff_category']['copy']       = array('Duplicate staff category', 'Duplicate staff category ID %s');
+$GLOBALS['TL_LANG']['tl_staff_category']['delete']     = array('Delete staff category', 'Delete staff category ID %s');
