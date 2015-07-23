@@ -22,7 +22,7 @@
 
   </figure>
 
-  <?php if($this->education !== null) { ?>
+  <?php if($this->educations !== null) { ?>
   <div class="education">
     <h3><?= $this->txt_educations ?></h3>
     <ul>
