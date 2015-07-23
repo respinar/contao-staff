@@ -36,45 +36,47 @@ abstract class ModuleStaff extends \Module
 
 
 	/**
-	 * Sort out protected archives
-	 * @param array
+	 * Sort out protected categories
+	 *
+	 * @param array $arrCategories
+	 *
 	 * @return array
 	 */
-	protected function sortOutProtected($arrStaffCategories)
+	protected function sortOutProtected($arrCategories)
 	{
-		if (BE_USER_LOGGED_IN || !is_array($arrStaffCategories) || empty($arrStaffCategories))
+		if (BE_USER_LOGGED_IN || !is_array($arrCategories) || empty($arrCategories))
 		{
-			return $arrStaffCategories;
+			return $arrCategories;
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objStaff = \StaffCategoryModel::findMultipleByIds($arrStaffCategories);
-		$arrStaffCategories = array();
+		$objCategory = \StaffCategoryModel::findMultipleByIds($arrCategories);
+		$arrCategories = array();
 
-		if ($objStaff !== null)
+		if ($objCategory !== null)
 		{
-			while ($objStaff->next())
+			while ($objCategory->next())
 			{
-				if ($objStaff->protected)
+				if ($objCategory->protected)
 				{
 					if (!FE_USER_LOGGED_IN)
 					{
 						continue;
 					}
 
-					$staffs = deserialize($objStaff->staffs);
+					$groups = deserialize($objCategory->groups);
 
-					if (!is_array($staffs) || empty($staffs) || !count(array_intersect($staffs, $this->User->staffs)))
+					if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
 					{
 						continue;
 					}
 				}
 
-				$arrStaffCategories[] = $objStaff->id;
+				$arrCategories[] = $objCategory->id;
 			}
 		}
 
-		return $arrStaffCategories;
+		return $arrCategories;
 	}
 
 
@@ -86,36 +88,50 @@ abstract class ModuleStaff extends \Module
 	 * @param integer
 	 * @return string
 	 */
-	protected function parsePerson($objPerson, $blnAddStaff=false, $strClass='', $intCount=0)
+	protected function parseEmployee($objEmployee, $blnAddStaff=false, $strClass='', $intCount=0)
 	{
 		global $objPage;
 
-		$objTemplate = new \FrontendTemplate($this->person_template);
-		$objTemplate->setData($objPerson->row());
+		$objTemplate = new \FrontendTemplate($this->staff_employee_template);
+		$objTemplate->setData($objEmployee->row());
 
-		$objTemplate->class = (($this->person_class != '') ? ' ' . $this->person_class : '') . $strClass;
+		$objTemplate->class = (($this->staff_employee_class != '') ? ' ' . $this->staff_employee_class : '') . $strClass;
 
-		if (!empty($objPerson->education))
+		if (!empty($objEmployee->education))
 		{
-			$objTemplate->education    = deserialize($objPerson->education);
+			$objTemplate->education    = deserialize($objEmployee->education);
 		}
 
-		$objTemplate->link        = $this->generatePersonUrl($objPerson, $blnAddStaff);
+		$objTemplate->link   = $this->generateEmployeeUrl($objEmployee, $blnAddStaff);
 
-		$objTemplate->staff  = $objPerson->getRelated('pid');
+		$objTemplate->staff  = $objEmployee->getRelated('pid');
 
-		$objTemplate->count = $intCount; // see #5708
+
+		$objTemplate->txt_educations = $GLOBALS['TL_LANG']['MSC']['educations'];
+		$objTemplate->txt_contact    = $GLOBALS['TL_LANG']['MSC']['contact'];
+		$objTemplate->txt_room       = $GLOBALS['TL_LANG']['MSC']['room'];
+		$objTemplate->txt_phone      = $GLOBALS['TL_LANG']['MSC']['phone'];
+		$objTemplate->txt_mobile     = $GLOBALS['TL_LANG']['MSC']['mobile'];
+		$objTemplate->txt_fax        = $GLOBALS['TL_LANG']['MSC']['fax'];
+		$objTemplate->txt_email      = $GLOBALS['TL_LANG']['MSC']['email'];
+		$objTemplate->txt_website    = $GLOBALS['TL_LANG']['MSC']['website'];
+		$objTemplate->txt_facebook   = $GLOBALS['TL_LANG']['MSC']['facebook'];
+		$objTemplate->txt_googleplus = $GLOBALS['TL_LANG']['MSC']['googleplus'];
+		$objTemplate->txt_twitter    = $GLOBALS['TL_LANG']['MSC']['twitter'];
+		$objTemplate->txt_linkedin   = $GLOBALS['TL_LANG']['MSC']['linkedin'];
+
+		$objTemplate->count  = $intCount; // see #5708
 
 		$objTemplate->addImage = false;
 
 		// Add an image
-		if ($objPerson->singleSRC != '')
+		if ($objEmployee->singleSRC != '')
 		{
-			$objModel = \FilesModel::findByUuid($objPerson->singleSRC);
+			$objModel = \FilesModel::findByUuid($objEmployee->singleSRC);
 
 			if ($objModel === null)
 			{
-				if (!\Validator::isUuid($objPerson->singleSRC))
+				if (!\Validator::isUuid($objEmployee->singleSRC))
 				{
 					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 				}
@@ -123,7 +139,7 @@ abstract class ModuleStaff extends \Module
 			elseif (is_file(TL_ROOT . '/' . $objModel->path))
 			{
 				// Do not override the field now that we have a model registry (see #6303)
-				$arrPerson = $objPerson->row();
+				$arrEmployee = $objEmployee->row();
 
 				// Override the default image size
 				if ($this->imgSize != '')
@@ -132,23 +148,23 @@ abstract class ModuleStaff extends \Module
 
 					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
-						$arrPerson['size'] = $this->imgSize;
+						$arrEmployee['size'] = $this->imgSize;
 					}
 				}
 
-				$arrPerson['singleSRC'] = $objModel->path;
+				$arrEmployee['singleSRC'] = $objModel->path;
 				$strLightboxId = 'lightbox[lb' . $this->id . ']';
-				$arrPerson['fullsize'] = $this->fullsize;
-				$this->addImageToTemplate($objTemplate, $arrPerson,null, $strLightboxId);
+				$arrEmployee['fullsize'] = $this->fullsize;
+				$this->addImageToTemplate($objTemplate, $arrEmployee,null, $strLightboxId);
 			}
 		}
 
 		$objTemplate->enclosure = array();
 
 		// Add enclosures
-		if ($objPerson->addEnclosure)
+		if ($objEmployee->addEnclosure)
 		{
-			$this->addEnclosuresToTemplate($objTemplate, $objPerson->row());
+			$this->addEnclosuresToTemplate($objTemplate, $objEmployee->row());
 		}
 
 		return $objTemplate->parse();
@@ -161,9 +177,9 @@ abstract class ModuleStaff extends \Module
 	 * @param boolean
 	 * @return array
 	 */
-	protected function parsePersons($objPersons, $blnAddStaff=false)
+	protected function parseEmployees($objEmployees, $blnAddStaff=false)
 	{
-		$limit = $objPersons->count();
+		$limit = $objEmployees->count();
 
 		if ($limit < 1)
 		{
@@ -171,14 +187,14 @@ abstract class ModuleStaff extends \Module
 		}
 
 		$count = 0;
-		$arrPersons = array();
+		$arrEmployees = array();
 
-		while ($objPersons->next())
+		while ($objEmployees->next())
 		{
-			$arrPersons[] = $this->parsePerson($objPersons, $blnAddStaff, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
+			$arrEmployees[] = $this->parseEmployee($objEmployees, $blnAddStaff, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->staff_employee_perRow) == 0) ? ' last_col' : '') . ((($count % $this->staff_employee_perRow) == 1) ? ' first_col' : ''), $count);
 		}
 
-		return $arrPersons;
+		return $arrEmployees;
 	}
 
 	/**
@@ -187,7 +203,7 @@ abstract class ModuleStaff extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generatePersonUrl($objItem, $blnAddStaff=false)
+	protected function generateEmployeeUrl($objItem, $blnAddStaff=false)
 	{
 		$strCacheKey = 'id_' . $objItem->id;
 
@@ -228,14 +244,14 @@ abstract class ModuleStaff extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateLink($strLink, $objPerson, $blnAddStaff=false, $blnIsReadMore=false)
+	protected function generateLink($strLink, $objEmployee, $blnAddStaff=false, $blnIsReadMore=false)
 	{
 
 		return sprintf('<a href="%s" title="%s">%s%s</a>',
-						$this->generatePersonUrl($objPerson, $blnAddStaff),
-						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objPerson->firstname . ' ' . $objPerson->lastname), true),
+						$this->generateEmployeeUrl($objEmployee, $blnAddStaff),
+						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objEmployee->firstname . ' ' . $objEmployee->lastname), true),
 						$strLink,
-						($blnIsReadMore ? ' <span class="invisible">'.$objPerson->title.'</span>' : ''));
+						($blnIsReadMore ? ' <span class="invisible">'.$objEmployee->firstname . ' ' . $objEmployee->lastname.'</span>' : ''));
 
 	}
 

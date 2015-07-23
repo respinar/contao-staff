@@ -61,7 +61,7 @@ class ModuleStaffList extends \ModuleStaff
 			return '';
 		}
 
-		// Show the catalog detail if an item has been selected
+		// Show the staff detail if an item has been selected
 		if ($this->staff_detailModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
 		{
 			return $this->getFrontendModule($this->staff_detailModule, $this->strColumn);
@@ -143,18 +143,18 @@ class ModuleStaffList extends \ModuleStaff
 		// Get the items
 		if (isset($limit))
 		{
-			$objPersons = \StaffEmployeeModel::findPublishedByPids($this->staff_categories, null, $limit, $offset);
+			$objEmployees = \StaffEmployeeModel::findPublishedByPids($this->staff_categories, null, $limit, $offset);
 		}
 		else
 		{
-			$objPersons = \StaffEmployeeModel::findPublishedByPids($this->staff_categories, null, 0, $offset);
+			$objEmployees = \StaffEmployeeModel::findPublishedByPids($this->staff_categories, null, 0, $offset);
 		}
 
 
-		// Add the Persons
-		if ($objPersons !== null)
+		// Add the Employees
+		if ($objEmployees !== null)
 		{
-			$this->Template->persons = $this->parsePersons($objPersons);
+			$this->Template->employees = $this->parseEmployees($objEmployees);
 		}
 
 	}

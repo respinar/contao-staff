@@ -45,8 +45,10 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 	(
 		'sorting' => array
 		(
-			'mode'                    => 1,
+			'mode'                    => 4,
+			'headerFields'            => array('title', 'jumpTo', 'protected'),
 			'fields'                  => array('lastname'),
+			'child_record_callback'   => array('tl_staff_employee', 'generateEmployeesRow'),
 			'flag'                    => 1
 		),
 		'label' => array
@@ -105,7 +107,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},firstname,lastname,alias;{employee_legend},post,employment;{education_legend},education;{image_legend},singleSRC;{contact_legend},floor,room,phone,ext,mobile,fax,email,website;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
+		'default'                     => '{title_legend},firstname,lastname,alias;{employee_legend},post,employment;{education_legend},education;{image_legend},singleSRC;{contact_legend},floor,room,phone,ext,mobile,fax,email,website;{socialmedia_legend},facebook_id,googleplus_id,twitter_id,linkedin_id;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -267,6 +269,38 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 			'search'                  => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'url', 'maxlength'=>255, 'feEditable'=>true, 'feViewable'=>true, 'feStaff'=>'contact', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'facebook_id' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['facebook_id'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255,'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'googleplus_id' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['googleplus_id'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255,'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'twitter_id' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['twitter_id'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255,'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'linkedin_id' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['linkedin_id'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255,'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'description' => array
@@ -445,6 +479,23 @@ class tl_staff_employee extends Backend
 				}
 				break;
 		}
+	}
+
+	/**
+	 * Generate a song row and return it as HTML string
+	 * @param array
+	 * @return string
+	 */
+	public function generateEmployeesRow($arrRow)
+	{
+		$objImage = \FilesModel::findByPk($arrRow['singleSRC']);
+
+		if ($objImage !== null)
+		{
+			$strImage = \Image::getHtml(\Image::get($objImage->path, '30', '40', 'center_center'));
+		}
+
+		return '<div><div style="float:left; margin-right:10px;">'.$strImage.'</div>'. $arrRow['firstname']. ' '. $arrRow['lastname'] . '</div>';
 	}
 
 	/**

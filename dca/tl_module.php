@@ -16,19 +16,8 @@
  * Add palettes to tl_module
  */
 
-$GLOBALS['TL_DCA']['tl_module']['palettes']['staff_list'] = '{title_legend},name,headline,type;
-                                                                  {staff_legend},staff_categories;
-                                                                  {config_legend},staff_detailModule,numberOfItems,perPage,skipFirst;
-                                                                  {template_legend},staff_employee_template,customTpl;
-                                                                  {staff_employee_legend},staff_employee_class,imgSize;
-                                                                  {protected_legend:hide},protected;
-                                                                  {expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['staff_detail'] = '{title_legend},name,headline,type;
-                                                                  {staff_legend},staff_categories;
-                                                                  {template_legend:hide},staff_employee_template,customTpl;
-                                                                  {image_legend},imgSize,fullsize;
-                                                                  {protected_legend:hide},protected;
-                                                                  {expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['staff_list'] = '{title_legend},name,headline,type;{staff_legend},staff_categories;{config_legend},staff_detailModule,numberOfItems,perPage,skipFirst;{template_legend},staff_employee_template,customTpl;{staff_employee_legend},staff_employee_class,staff_employee_perRow;{image_legend},imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['staff_detail'] = '{title_legend},name,headline,type;{staff_legend},staff_categories;{template_legend:hide},staff_employee_template,customTpl;{image_legend},imgSize,fullsize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -70,6 +59,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['staff_employee_class'] = array
 	'inputType'               => 'text',
 	'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
+);
+$GLOBALS['TL_DCA']['tl_module']['fields']['staff_employee_perRow'] = array
+(
+    'label'                => &$GLOBALS['TL_LANG']['tl_module']['staff_employee_perRow'],
+    'default'              => '4',
+    'exclude'              => true,
+    'inputType'            => 'select',
+    'options'              => array('1','2','3','4','6','12'),
+    'eval'                 => array('tl_class'=>'w50'),
+    'sql'                  => "varchar(64) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['fullsize']['eval']['tl_class'] = 'w50 m12';

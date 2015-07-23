@@ -61,7 +61,6 @@ class ModuleStaffDetail extends \ModuleStaff
 
         $this->staff_categories = $this->sortOutProtected(deserialize($this->staff_categories));
 
-
 		return parent::generate();
 	}
 
@@ -74,27 +73,27 @@ class ModuleStaffDetail extends \ModuleStaff
 
 		global $objPage;
 
-		$this->Template->person = '';
+		$this->Template->employee = '';
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$objPerson = \StaffEmployeeModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->staff_categories);
+		$objEmployee = \StaffEmployeeModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->staff_categories);
 
 		// Overwrite the page title
-		if ($objPerson->title != '')
+		if ($objEmployee->title != '')
 		{
-			$objPage->pageTitle = strip_tags(strip_insert_tags($objPerson->firstname . ' ' .$objPerson->lastname));
+			$objPage->pageTitle = strip_tags(strip_insert_tags($objEmployee->firstname . ' ' .$objEmployee->lastname));
 		}
 
 		// Overwrite the page description
-		if ($objPerson->description != '')
+		if ($objEmployee->description != '')
 		{
-			$objPage->description = $this->prepareMetaDescription($objPerson->description);
+			$objPage->description = $this->prepareMetaDescription($objEmployee->description);
 		}
 
-		$arrPerson = $this->parsePerson($objPerson);
+		$arrEmployee = $this->parseEmployee($objEmployee);
 
-		$this->Template->person = $arrPerson;
+		$this->Template->employee = $arrEmployee;
 
 	}
 }
