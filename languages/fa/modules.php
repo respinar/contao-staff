@@ -8,12 +8,12 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-19T22:30:20+04:30
+ * last-updated: 2015-07-20T13:20:36+04:30
  */
 
 $GLOBALS['TL_LANG']['FMD']['staff']['0']        = 'کارمندان';
 $GLOBALS['TL_LANG']['FMD']['staff_detail']['0'] = 'جزئیات کارمند';
-$GLOBALS['TL_LANG']['FMD']['staff_list']['0']   = 'فهرست کارمند';
+$GLOBALS['TL_LANG']['FMD']['staff_list']['0']   = 'فهرست کارمندان';
 $GLOBALS['TL_LANG']['MOD']['staff']['0']        = 'کارمندان';
-$GLOBALS['TL_LANG']['MOD']['staff']['1']        = 'مدیریت کامندان و اعضاء';
+$GLOBALS['TL_LANG']['MOD']['staff']['1']        = 'مدیریت کارمندان';
 

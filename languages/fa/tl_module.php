@@ -8,13 +8,14 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2015-07-19T22:53:50+04:30
+ * last-updated: 2015-07-20T13:20:36+04:30
  */
 
 $GLOBALS['TL_LANG']['tl_module']['staff_categories']['0']        = 'دسته‌بندی‌های کارمندان';
 $GLOBALS['TL_LANG']['tl_module']['staff_detailModule']['0']      = 'ماژول جزئیات کارمندان';
 $GLOBALS['TL_LANG']['tl_module']['staff_employee_class']['0']    = 'کلاس سی‌اس‌اس کارمند';
 $GLOBALS['TL_LANG']['tl_module']['staff_employee_legend']        = 'تنظیمات کارمند';
+$GLOBALS['TL_LANG']['tl_module']['staff_employee_perRow']['0']   = 'کارمند در هر ردیف';
 $GLOBALS['TL_LANG']['tl_module']['staff_employee_template']['0'] = 'قالب کارمند';
 $GLOBALS['TL_LANG']['tl_module']['staff_legend']                 = 'تنظیمات کارمندان';
 $GLOBALS['TL_LANG']['tl_module']['staffs']['0']                  = 'کارمندان';
