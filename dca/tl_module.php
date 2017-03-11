@@ -76,11 +76,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['fullsize']['eval']['tl_class'] = 'w50
 
 /**
  * Class tl_module_staff
- *
- * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Hamid Abbaszadeh 2014
- * @author     Hamid Abbaszadeh <http://respinar.com>
- * @package    Catalog
  */
 class tl_module_staff extends Backend
 {
@@ -123,12 +118,12 @@ class tl_module_staff extends Backend
 
 	/**
 	 * Return all prices templates as array
-	 * @param object
+	 *
 	 * @return array
 	 */
-	public function getEmployeeTemplates(DataContainer $dc)
+	public function getEmployeeTemplates()
 	{
-		return $this->getTemplateGroup('employee_', $dc->activeRecord->pid);
+		return $this->getTemplateGroup('employee_');
 	}
 
 	/**
