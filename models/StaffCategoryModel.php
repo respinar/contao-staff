@@ -3,26 +3,22 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2017 Leo Feyer
  *
  * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL3
- * @copyright respinar 2014
+ * @copyright respinar 2014-2017
  */
 
 
 /**
  * Namespace
  */
-namespace staff;
+namespace Respinar\Staff;
 
 /**
- * Class ModuleStaff
- *
- * @copyright  respinar 2014
- * @author     Hamid Abbaszadeh
- * @package    Devtools
+ * Class StaffCategoryModel
  */
 class StaffCategoryModel extends \Model
 {

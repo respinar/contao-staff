@@ -15,15 +15,15 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['staff_categories']        = array('Staff categories','');
-$GLOBALS['TL_LANG']['tl_module']['staff_detailModule']      = array('Staff detail module','');
-$GLOBALS['TL_LANG']['tl_module']['staff_employee_template'] = array('Employee template','');
-$GLOBALS['TL_LANG']['tl_module']['staff_employee_class']    = array('Employee CSS class','');
-$GLOBALS['TL_LANG']['tl_module']['staff_employee_perRow']   = array('Employee per row','');
+$GLOBALS['TL_LANG']['tl_module']['staff_categories']      = array('Staff categories','');
+$GLOBALS['TL_LANG']['tl_module']['staff_detailModule']    = array('Staff detail module','');
+$GLOBALS['TL_LANG']['tl_module']['staff_member_template'] = array('Member template','');
+$GLOBALS['TL_LANG']['tl_module']['staff_member_class']    = array('Member CSS class','');
+$GLOBALS['TL_LANG']['tl_module']['staff_member_perRow']   = array('Member per row','');
 
 
 /**
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_module']['staff_legend']          = 'Staff settings';
-$GLOBALS['TL_LANG']['tl_module']['staff_employee_legend'] = 'Employee settings';
+$GLOBALS['TL_LANG']['tl_module']['staff_member_legend']   = 'Member settings';

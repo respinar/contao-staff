@@ -3,12 +3,12 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2017 Leo Feyer
  *
  * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL3
- * @copyright respinar 2014
+ * @copyright respinar 2014-2017
  */
 
 
@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_staff_category'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ctable'                      => array('tl_staff_employee'),
+		'ctable'                      => array('tl_staff_member'),
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
@@ -67,7 +67,7 @@ $GLOBALS['TL_DCA']['tl_staff_category'] = array
 			'edit' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_staff_category']['edit'],
-				'href'                => 'table=tl_staff_employee',
+				'href'                => 'table=tl_staff_member',
 				'icon'                => 'edit.gif'
 			),
 			'editheader' => array
@@ -105,7 +105,7 @@ $GLOBALS['TL_DCA']['tl_staff_category'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('protected'),
-		'default'                     => '{title_legend},title,language,master;{redirect_legend},jumpTo;{protected_legend:hide},protected;'
+		'default'                     => '{title_legend},title;{redirect_legend},jumpTo;{protected_legend:hide},protected;'
 	),
 
 	// Subpalettes
@@ -132,25 +132,6 @@ $GLOBALS['TL_DCA']['tl_staff_category'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'language' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_category']['language'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'filter'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(32) NOT NULL default ''"
-		),
-		'master' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_category']['master'],
-			'exclude'                 => true,
-			'inputType'               => 'select',
-			'options_callback'        => array('tl_staff_category', 'getStaffCategories'),
-			'eval'                    => array('includeBlankOption'=>true, 'blankOptionLabel'=>&$GLOBALS['TL_LANG']['tl_staff_category']['isMaster']),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'jumpTo' => array
 		(
@@ -375,23 +356,4 @@ class tl_staff_category extends Backend
 		return $this->User->hasAccess('delete', 'staffp') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
-	/**
-	 * Get an array of possible staffs
-	 *
-	 * @param	DataContainer
-	 * @return	array
-	 * @link	http://www.contao.org/callbacks.html#options_callback
-	 */
-	public function getStaffCategories(DataContainer $dc)
-	{
-		$arrStaffCategories = array();
-		$objStaffCategories = $this->Database->prepare("SELECT * FROM tl_staff_category WHERE language!=? AND id!=? AND master=0 ORDER BY title")->execute($dc->activeRecord->language, $dc->id);
-
-		while( $objStaffCategories->next() )
-		{
-			$arrStaffCategories[$objStaffCategories->id] = sprintf($GLOBALS['TL_LANG']['tl_staff_category']['isSlave'], $objStaffCategories->title);
-		}
-
-		return $arrStaffCategories;
-	}
 }

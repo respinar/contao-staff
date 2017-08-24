@@ -3,27 +3,23 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2017 Leo Feyer
  *
  * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL3
- * @copyright respinar 2014
+ * @copyright respinar 2014-2017
  */
 
 
 /**
  * Namespace
  */
-namespace staff;
+namespace Respinar\Staff;
 
 
 /**
  * Class ModuleStaffList
- *
- * @copyright  respinar 2014
- * @author     Hamid Abbaszadeh
- * @package    Devtools
  */
 class ModuleStaffList extends \ModuleStaff
 {
@@ -89,7 +85,7 @@ class ModuleStaffList extends \ModuleStaff
 		$this->Template->persons = array();
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyStaff'];
 
-		$intTotal = \StaffEmployeeModel::countPublishedByPids($this->staff_categories);
+		$intTotal = \StaffMemberModel::countPublishedByPids($this->staff_categories);
 
 		if ($intTotal < 1)
 		{
@@ -143,18 +139,18 @@ class ModuleStaffList extends \ModuleStaff
 		// Get the items
 		if (isset($limit))
 		{
-			$objEmployees = \StaffEmployeeModel::findPublishedByPids($this->staff_categories, null, $limit, $offset);
+			$objMembers = \StaffMemberModel::findPublishedByPids($this->staff_categories, null, $limit, $offset);
 		}
 		else
 		{
-			$objEmployees = \StaffEmployeeModel::findPublishedByPids($this->staff_categories, null, 0, $offset);
+			$objMembers = \StaffMemberModel::findPublishedByPids($this->staff_categories, null, 0, $offset);
 		}
 
 
-		// Add the Employees
-		if ($objEmployees !== null)
+		// Add the members
+		if ($objMembers !== null)
 		{
-			$this->Template->employees = $this->parseEmployees($objEmployees);
+			$this->Template->members = $this->parseMembers($objMembers);
 		}
 
 	}

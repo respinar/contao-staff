@@ -3,12 +3,12 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2017 Leo Feyer
  *
  * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL3
- * @copyright respinar 2014
+ * @copyright respinar 2014-2017
  */
 
 
@@ -19,7 +19,7 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 (
 	'staff' => array
 	(
-		'tables'     => array('tl_staff_category','tl_staff_employee'),
+		'tables'     => array('tl_staff_category','tl_staff_member','tl_content'),
 		'icon'       => 'system/modules/staff/assets/icon.png',
 	)
 ));
@@ -32,8 +32,8 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 (
 	'staff' => array
 	(
-		'staff_list'    => 'ModuleStaffList',
-		'staff_detail'  => 'ModuleStaffDetail'
+		'staff_list'    => 'Respinar\Staff\ModuleStaffList',
+		'staff_detail'  => 'Respinar\Staff\ModuleStaffDetail'
 	)
 ));
 

@@ -3,19 +3,19 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2017 Leo Feyer
  *
  * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL3
- * @copyright respinar 2014
+ * @copyright respinar 2014-2017
  */
 
 
 /**
- * Table tl_staff_employee
+ * Table tl_staff_member
  */
-$GLOBALS['TL_DCA']['tl_staff_employee'] = array
+$GLOBALS['TL_DCA']['tl_staff_member'] = array
 (
 
 	// Config
@@ -23,11 +23,12 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_staff_category',
+		'ctable'                      => array('tl_content'),
 		'enableVersioning'            => true,
 		'onload_callback'             => array
 		(
-			array('tl_staff_employee', 'checkPermission'),
-			array('tl_staff_employee', 'showSelectbox'),
+			array('tl_staff_member', 'checkPermission'),
+			array('tl_staff_member', 'showSelectbox'),
 		),
 		'sql' => array
 		(
@@ -48,7 +49,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 			'mode'                    => 4,
 			'headerFields'            => array('title', 'jumpTo', 'protected'),
 			'fields'                  => array('lastname'),
-			'child_record_callback'   => array('tl_staff_employee', 'generateEmployeesRow'),
+			'child_record_callback'   => array('tl_staff_member', 'generateMembersRow'),
 			'flag'                    => 1
 		),
 		'label' => array
@@ -70,33 +71,39 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		(
 			'edit' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_staff_employee']['edit'],
-				'href'                => 'act=edit',
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff_member']['edit'],
+				'href'                => 'table=tl_content',
 				'icon'                => 'edit.gif'
+			),
+			'editheader' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff_member']['edit'],
+				'href'                => 'act=edit',
+				'icon'                => 'header.gif'
 			),
 			'copy' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_staff_employee']['copy'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff_member']['copy'],
 				'href'                => 'act=copy',
 				'icon'                => 'copy.gif'
 			),
 			'delete' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_staff_employee']['delete'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff_member']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'toggle' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_staff_employee']['toggle'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff_member']['toggle'],
 				'icon'                => 'visible.gif',
 				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-				'button_callback'     => array('tl_staff_employee', 'toggleIcon')
+				'button_callback'     => array('tl_staff_member', 'toggleIcon')
 			),
 			'show' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_staff_employee']['show'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_staff_member']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
 			)
@@ -107,7 +114,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addEnclosure','published'),
-		'default'                     => '{title_legend},firstname,lastname,alias;{employee_legend},post,employment;{education_legend},education;{image_legend},singleSRC;{contact_legend},floor,room,phone,ext,mobile,fax,email,website;{socialmedia_legend},facebook_id,googleplus_id,twitter_id,linkedin_id;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
+		'default'                     => '{title_legend},firstname,lastname,alias;{image_legend},singleSRC;{employee_legend},post,membership;{education_legend},education;{certificate_legend},certificate;{contact_legend},floor,room,phone,ext,mobile,fax,email,website;{socialmedia_legend},facebook_id,googleplus_id,twitter_id,linkedin_id;{enclosure_legend:hide},addEnclosure;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -136,7 +143,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'firstname' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['firstname'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['firstname'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255,'tl_class'=>'w50'),
@@ -144,7 +151,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'lastname' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['lastname'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['lastname'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255,'tl_class'=>'w50'),
@@ -152,25 +159,17 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'alias' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['alias'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['alias'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alias','unique'=>true,'maxlength'=>128, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
-		),
-		'languageMain' => array(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['languageMain'],
-			'exclude'                 => false,
-			'inputType'               => 'select',
-			'options_callback'        => array('tl_staff_employee', 'getMasterStaff'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
-		),
+		),		
 		'singleSRC' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['singleSRC'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('mandatory'=>true,'fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes']),
@@ -178,15 +177,15 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'post' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['post'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['post'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255,'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'employment' => array
+		'membership' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['employment'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['membership'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feStaff'=>'personal', 'tl_class'=>'w50 wizard'),
@@ -194,7 +193,16 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'education' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['education'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['education'],
+			'exclude'                 => true,
+			'sorting'                 => true,
+			'inputType'               => 'listWizard',
+			'eval'                    => array(),
+			'sql'                     => "blob NULL",
+		),
+		'certificate' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['certificate'],
 			'exclude'                 => true,
 			'sorting'                 => true,
 			'inputType'               => 'listWizard',
@@ -203,7 +211,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'floor' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['floor'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['floor'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255,'tl_class'=>'w50'),
@@ -211,7 +219,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'room' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['room'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['room'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255,'tl_class'=>'w50'),
@@ -219,7 +227,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'phone' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['phone'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['phone'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -228,7 +236,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'ext' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['ext'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['ext'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -237,7 +245,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'mobile' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['mobile'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['mobile'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -246,7 +254,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'fax' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['fax'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['fax'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -255,7 +263,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'email' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['email'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['email'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -264,7 +272,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'website' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['website'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['website'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -273,7 +281,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'facebook_id' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['facebook_id'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['facebook_id'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255,'tl_class'=>'w50'),
@@ -281,7 +289,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'googleplus_id' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['googleplus_id'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['googleplus_id'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255,'tl_class'=>'w50'),
@@ -289,7 +297,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'twitter_id' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['twitter_id'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['twitter_id'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255,'tl_class'=>'w50'),
@@ -297,7 +305,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'linkedin_id' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['linkedin_id'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['linkedin_id'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255,'tl_class'=>'w50'),
@@ -305,7 +313,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'description' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['description'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['description'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
 			'search'                  => true,
@@ -314,7 +322,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'addEnclosure' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['addEnclosure'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['addEnclosure'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true),
@@ -322,7 +330,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'enclosure' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['enclosure'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['enclosure'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'isDownloads'=>true, 'extensions'=>Config::get('allowedDownload'), 'mandatory'=>true),
@@ -330,7 +338,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'published' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['published'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['published'],
 			'exclude'                 => true,
 			'filter'                  => true,
 			'flag'                    => 1,
@@ -340,7 +348,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'start' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['start'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['start'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
@@ -348,7 +356,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 		),
 		'stop' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_employee']['stop'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_staff_member']['stop'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
@@ -360,7 +368,7 @@ $GLOBALS['TL_DCA']['tl_staff_employee'] = array
 /**
  * Provide miscellaneous methods that are used by the data configuration array
  */
-class tl_staff_employee extends Backend
+class tl_staff_member extends Backend
 {
 
 	/**
@@ -373,7 +381,7 @@ class tl_staff_employee extends Backend
 	}
 
 	/**
-	 * Check permissions to edit table tl_staff_employee
+	 * Check permissions to edit table tl_staff_member
 	 */
 	public function checkPermission()
 	{
@@ -423,7 +431,7 @@ class tl_staff_employee extends Backend
 			case 'delete':
 			case 'toggle':
 			case 'feature':
-				$objArchive = $this->Database->prepare("SELECT pid FROM tl_staff_employee WHERE id=?")
+				$objArchive = $this->Database->prepare("SELECT pid FROM tl_staff_member WHERE id=?")
 											 ->limit(1)
 											 ->execute($id);
 
@@ -452,7 +460,7 @@ class tl_staff_employee extends Backend
 					$this->redirect('contao/main.php?act=error');
 				}
 
-				$objArchive = $this->Database->prepare("SELECT id FROM tl_staff_employee WHERE pid=?")
+				$objArchive = $this->Database->prepare("SELECT id FROM tl_staff_member WHERE pid=?")
 											 ->execute($id);
 
 				if ($objArchive->numRows < 1)
@@ -486,7 +494,7 @@ class tl_staff_employee extends Backend
 	 * @param array
 	 * @return string
 	 */
-	public function generateEmployeesRow($arrRow)
+	public function generateMembersRow($arrRow)
 	{
 		$objImage = \FilesModel::findByPk($arrRow['singleSRC']);
 
@@ -516,7 +524,7 @@ class tl_staff_employee extends Backend
 			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->title));
 		}
 
-		$objAlias = $this->Database->prepare("SELECT id FROM tl_staff_employee WHERE alias=?")
+		$objAlias = $this->Database->prepare("SELECT id FROM tl_staff_member WHERE alias=?")
 								   ->execute($varValue);
 
 		// Check whether the emplyee alias exists
@@ -544,11 +552,11 @@ class tl_staff_employee extends Backend
 	 */
 	public function getMasterStaff(DataContainer $dc)
 	{
-		$sameDay = $GLOBALS['TL_LANG']['tl_staff_employee']['sameDay'];
-		$otherDay = $GLOBALS['TL_LANG']['tl_staff_employee']['otherDay'];
+		$sameDay = $GLOBALS['TL_LANG']['tl_staff_member']['sameDay'];
+		$otherDay = $GLOBALS['TL_LANG']['tl_staff_member']['otherDay'];
 
 		$arrItems = array($sameDay => array(), $otherDay => array());
-		$objItems = $this->Database->prepare("SELECT * FROM tl_staff_employee WHERE pid=(SELECT tl_staff_category.master FROM tl_staff_category LEFT OUTER JOIN tl_staff_employee ON tl_staff_employee.pid=tl_staff_category.id WHERE tl_staff_employee.id=?) ORDER BY tstamp DESC")->execute($dc->id);
+		$objItems = $this->Database->prepare("SELECT * FROM tl_staff_member WHERE pid=(SELECT tl_staff_category.master FROM tl_staff_category LEFT OUTER JOIN tl_staff_member ON tl_staff_member.pid=tl_staff_category.id WHERE tl_staff_member.id=?) ORDER BY tstamp DESC")->execute($dc->id);
 
 		$dayBegin = strtotime('0:00', $dc->activeRecord->date);
 
@@ -579,18 +587,18 @@ class tl_staff_employee extends Backend
 	{
 		if($this->Input->get('act') == "edit")
 		{
-			$objStaff = $this->Database->prepare("SELECT tl_staff_category.* FROM tl_staff_category LEFT OUTER JOIN tl_staff_employee ON tl_staff_employee.pid=tl_staff_category.id WHERE tl_staff_employee.id=?")
+			$objStaff = $this->Database->prepare("SELECT tl_staff_category.* FROM tl_staff_category LEFT OUTER JOIN tl_staff_member ON tl_staff_member.pid=tl_staff_category.id WHERE tl_staff_member.id=?")
 										 ->limit(1)
 										 ->execute($dc->id);
 
 			if($objStaff->numRows && $objStaff->master > 0)
 			{
-				$GLOBALS['TL_DCA']['tl_staff_employee']['palettes']['default'] = preg_replace('@([,|;])(alias[,|;])@','$1languageMain,$2', $GLOBALS['TL_DCA']['tl_staff_employee']['palettes']['default']);
+				$GLOBALS['TL_DCA']['tl_staff_member']['palettes']['default'] = preg_replace('@([,|;])(alias[,|;])@','$1languageMain,$2', $GLOBALS['TL_DCA']['tl_staff_member']['palettes']['default']);
 			}
 		}
 		else if($this->Input->get('act') == "editAll")
 		{
-			$GLOBALS['TL_DCA']['tl_staff_employee']['palettes']['regular'] = preg_replace('@([,|;]{1}language)([,|;]{1})@','$1,languageMain$2', $GLOBALS['TL_DCA']['tl_staff_employee']['palettes']['regular']);
+			$GLOBALS['TL_DCA']['tl_staff_member']['palettes']['regular'] = preg_replace('@([,|;]{1}language)([,|;]{1})@','$1,languageMain$2', $GLOBALS['TL_DCA']['tl_staff_member']['palettes']['regular']);
 		}
 	}
 
@@ -616,7 +624,7 @@ class tl_staff_employee extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->hasAccess('tl_staff_employee::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_staff_member::published', 'alexf'))
 		{
 			return '';
 		}
@@ -647,19 +655,19 @@ class tl_staff_employee extends Backend
 		$this->checkPermission();
 
 		// Check permissions to publish
-		if (!$this->User->hasAccess('tl_staff_employee::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_staff_member::published', 'alexf'))
 		{
 			$this->log('Not enough permissions to publish/unpublish employee ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$objVersions = new Versions('tl_staff_employee', $intId);
+		$objVersions = new Versions('tl_staff_member', $intId);
 		$objVersions->initialize();
 
 		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_staff_employee']['fields']['published']['save_callback']))
+		if (is_array($GLOBALS['TL_DCA']['tl_staff_member']['fields']['published']['save_callback']))
 		{
-			foreach ($GLOBALS['TL_DCA']['tl_staff_employee']['fields']['published']['save_callback'] as $callback)
+			foreach ($GLOBALS['TL_DCA']['tl_staff_member']['fields']['published']['save_callback'] as $callback)
 			{
 				if (is_array($callback))
 				{
@@ -674,11 +682,11 @@ class tl_staff_employee extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_staff_employee SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_staff_member SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_staff_employee.id='.$intId.'" has been created'.$this->getParentEntries('tl_staff_employee', $intId), __METHOD__, TL_GENERAL);
+		$this->log('A new version of record "tl_staff_member.id='.$intId.'" has been created'.$this->getParentEntries('tl_staff_member', $intId), __METHOD__, TL_GENERAL);
 
 	}
 

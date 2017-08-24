@@ -15,12 +15,12 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['staff'] = array('Staff', 'Manage staff and employee');
+$GLOBALS['TL_LANG']['MOD']['staff'] = array('Staff', 'Manage staff and Member');
 
 
 /**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['staff']        = array('Staff', '');
-$GLOBALS['TL_LANG']['FMD']['staff_list']   = array('Employee list', '');
-$GLOBALS['TL_LANG']['FMD']['staff_detail'] = array('Employee details', '');
+$GLOBALS['TL_LANG']['FMD']['staff_list']   = array('Member list', '');
+$GLOBALS['TL_LANG']['FMD']['staff_detail'] = array('Member details', '');

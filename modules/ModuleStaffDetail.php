@@ -3,27 +3,23 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2017 Leo Feyer
  *
  * @package   staff
  * @author    Hamid Abbaszadeh
  * @license   GNU/LGPL3
- * @copyright respinar 2014
+ * @copyright respinar 2014-2017
  */
 
 
 /**
  * Namespace
  */
-namespace staff;
+namespace Respinar\Staff;
 
 
 /**
  * Class ModuleStaffDetail
- *
- * @copyright  respinar 2014
- * @author     Hamid Abbaszadeh
- * @package    Devtools
  */
 class ModuleStaffDetail extends \ModuleStaff
 {
@@ -73,27 +69,27 @@ class ModuleStaffDetail extends \ModuleStaff
 
 		global $objPage;
 
-		$this->Template->employee = '';
+		$this->Template->member = '';
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$objEmployee = \StaffEmployeeModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->staff_categories);
+		$objMember = \StaffMemberModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->staff_categories);
 
 		// Overwrite the page title
-		if ($objEmployee->title != '')
+		if ($objMember->title != '')
 		{
-			$objPage->pageTitle = strip_tags(strip_insert_tags($objEmployee->firstname . ' ' .$objEmployee->lastname));
+			$objPage->pageTitle = strip_tags(strip_insert_tags($objMember->firstname . ' ' .$objMember->lastname));
 		}
 
 		// Overwrite the page description
-		if ($objEmployee->description != '')
+		if ($objMember->description != '')
 		{
-			$objPage->description = $this->prepareMetaDescription($objEmployee->description);
+			$objPage->description = $this->prepareMetaDescription($objMember->description);
 		}
 
-		$arrEmployee = $this->parseEmployee($objEmployee);
+		$arrMember = $this->parseMember($objMember);
 
-		$this->Template->employee = $arrEmployee;
+		$this->Template->member = $arrMember;
 
 	}
 }

@@ -14,7 +14,7 @@
  */
 ClassLoader::addNamespaces(array
 (
-	'staff',
+	'Respinar\Staff',
 ));
 
 
@@ -24,16 +24,16 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Classes
-	'staff\Staff'              => 'system/modules/staff/classes/Staff.php',
+	'Respinar\Staff\Staff'              => 'system/modules/staff/classes/Staff.php',
 
 	// Modules
-	'staff\ModuleStaff'        => 'system/modules/staff/modules/ModuleStaff.php',
-	'staff\ModuleStaffList'    => 'system/modules/staff/modules/ModuleStaffList.php',
-	'staff\ModuleStaffDetail'  => 'system/modules/staff/modules/ModuleStaffDetail.php',
+	'Respinar\Staff\ModuleStaff'        => 'system/modules/staff/modules/ModuleStaff.php',
+	'Respinar\Staff\ModuleStaffList'    => 'system/modules/staff/modules/ModuleStaffList.php',
+	'Respinar\Staff\ModuleStaffDetail'  => 'system/modules/staff/modules/ModuleStaffDetail.php',
 
 	// Models
-	'staff\StaffCategoryModel' => 'system/modules/staff/models/StaffCategoryModel.php',
-	'staff\StaffEmployeeModel' => 'system/modules/staff/models/StaffEmployeeModel.php',
+	'Respinar\Staff\StaffCategoryModel' => 'system/modules/staff/models/StaffCategoryModel.php',
+	'Respinar\Staff\StaffMemberModel'   => 'system/modules/staff/models/StaffMemberModel.php',
 ));
 
 
@@ -42,8 +42,8 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mod_staff_detail' => 'system/modules/staff/templates/modules',
-	'mod_staff_list'   => 'system/modules/staff/templates/modules',
-	'employee_full'    => 'system/modules/staff/templates/employee',
-	'employee_short'   => 'system/modules/staff/templates/employee',
+	'mod_staff_detail'   => 'system/modules/staff/templates/modules',
+	'mod_staff_list'     => 'system/modules/staff/templates/modules',
+	'staff_member_full'  => 'system/modules/staff/templates/staff_member',
+	'staff_member_short' => 'system/modules/staff/templates/staff_member',
 ));

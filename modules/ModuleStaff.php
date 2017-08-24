@@ -15,15 +15,11 @@
 /**
  * Namespace
  */
-namespace staff;
+namespace Respinar\Staff;
 
 
 /**
  * Class ModuleStaff
- *
- * @copyright  respinar 2014
- * @author     Hamid Abbaszadeh
- * @package    Staff
  */
 abstract class ModuleStaff extends \Module
 {
@@ -50,7 +46,7 @@ abstract class ModuleStaff extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objCategory = \StaffCategoryModel::findMultipleByIds($arrCategories);
+		$objCategory = StaffCategoryModel::findMultipleByIds($arrCategories);
 		$arrCategories = array();
 
 		if ($objCategory !== null)
@@ -88,23 +84,23 @@ abstract class ModuleStaff extends \Module
 	 * @param integer
 	 * @return string
 	 */
-	protected function parseEmployee($objEmployee, $blnAddStaff=false, $strClass='', $intCount=0)
+	protected function parseMember($objMember, $blnAddStaff=false, $strClass='', $intCount=0)
 	{
 		global $objPage;
 
-		$objTemplate = new \FrontendTemplate($this->staff_employee_template);
-		$objTemplate->setData($objEmployee->row());
+		$objTemplate = new \FrontendTemplate($this->staff_member_template);
+		$objTemplate->setData($objMember->row());
 
-		$objTemplate->class = (($this->staff_employee_class != '') ? ' ' . $this->staff_employee_class : '') . $strClass;
+		$objTemplate->class = (($this->staff_member_class != '') ? ' ' . $this->staff_member_class : '') . $strClass;
 
-		if (!empty($objEmployee->education))
+		if (!empty($objMember->education))
 		{
-			$objTemplate->education    = deserialize($objEmployee->education);
+			$objTemplate->education    = deserialize($objMember->education);
 		}
 
-		$objTemplate->link   = $this->generateEmployeeUrl($objEmployee, $blnAddStaff);
+		$objTemplate->link   = $this->generateMemberUrl($objMember, $blnAddStaff);
 
-		$objTemplate->staff  = $objEmployee->getRelated('pid');
+		$objTemplate->staff  = $objMember->getRelated('pid');
 
 
 		$objTemplate->txt_educations = $GLOBALS['TL_LANG']['MSC']['educations'];
@@ -125,13 +121,13 @@ abstract class ModuleStaff extends \Module
 		$objTemplate->addImage = false;
 
 		// Add an image
-		if ($objEmployee->singleSRC != '')
+		if ($objMember->singleSRC != '')
 		{
-			$objModel = \FilesModel::findByUuid($objEmployee->singleSRC);
+			$objModel = \FilesModel::findByUuid($objMember->singleSRC);
 
 			if ($objModel === null)
 			{
-				if (!\Validator::isUuid($objEmployee->singleSRC))
+				if (!\Validator::isUuid($objMember->singleSRC))
 				{
 					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 				}
@@ -139,7 +135,7 @@ abstract class ModuleStaff extends \Module
 			elseif (is_file(TL_ROOT . '/' . $objModel->path))
 			{
 				// Do not override the field now that we have a model registry (see #6303)
-				$arrEmployee = $objEmployee->row();
+				$arrMember = $objMember->row();
 
 				// Override the default image size
 				if ($this->imgSize != '')
@@ -148,23 +144,23 @@ abstract class ModuleStaff extends \Module
 
 					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
-						$arrEmployee['size'] = $this->imgSize;
+						$arrMember['size'] = $this->imgSize;
 					}
 				}
 
-				$arrEmployee['singleSRC'] = $objModel->path;
+				$arrMember['singleSRC'] = $objModel->path;
 				$strLightboxId = 'lightbox[lb' . $this->id . ']';
-				$arrEmployee['fullsize'] = $this->fullsize;
-				$this->addImageToTemplate($objTemplate, $arrEmployee,null, $strLightboxId);
+				$arrMember['fullsize'] = $this->fullsize;
+				$this->addImageToTemplate($objTemplate, $arrMember,null, $strLightboxId);
 			}
 		}
 
 		$objTemplate->enclosure = array();
 
 		// Add enclosures
-		if ($objEmployee->addEnclosure)
+		if ($objMember->addEnclosure)
 		{
-			$this->addEnclosuresToTemplate($objTemplate, $objEmployee->row());
+			$this->addEnclosuresToTemplate($objTemplate, $objMember->row());
 		}
 
 		return $objTemplate->parse();
@@ -177,9 +173,9 @@ abstract class ModuleStaff extends \Module
 	 * @param boolean
 	 * @return array
 	 */
-	protected function parseEmployees($objEmployees, $blnAddStaff=false)
+	protected function parseMembers($objMembers, $blnAddStaff=false)
 	{
-		$limit = $objEmployees->count();
+		$limit = $objMembers->count();
 
 		if ($limit < 1)
 		{
@@ -187,14 +183,14 @@ abstract class ModuleStaff extends \Module
 		}
 
 		$count = 0;
-		$arrEmployees = array();
+		$arrMembers = array();
 
-		while ($objEmployees->next())
+		while ($objMembers->next())
 		{
-			$arrEmployees[] = $this->parseEmployee($objEmployees, $blnAddStaff, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->staff_employee_perRow) == 0) ? ' last_col' : '') . ((($count % $this->staff_employee_perRow) == 1) ? ' first_col' : ''), $count);
+			$arrMembers[] = $this->parseMember($objMembers, $blnAddStaff, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % $this->staff_member_perRow) == 0) ? ' last_col' : '') . ((($count % $this->staff_member_perRow) == 1) ? ' first_col' : ''), $count);
 		}
 
-		return $arrEmployees;
+		return $arrMembers;
 	}
 
 	/**
@@ -203,7 +199,7 @@ abstract class ModuleStaff extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateEmployeeUrl($objItem, $blnAddStaff=false)
+	protected function generateMemberUrl($objItem, $blnAddStaff=false)
 	{
 		$strCacheKey = 'id_' . $objItem->id;
 
@@ -244,14 +240,14 @@ abstract class ModuleStaff extends \Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateLink($strLink, $objEmployee, $blnAddStaff=false, $blnIsReadMore=false)
+	protected function generateLink($strLink, $objMember, $blnAddStaff=false, $blnIsReadMore=false)
 	{
 
 		return sprintf('<a href="%s" title="%s">%s%s</a>',
-						$this->generateEmployeeUrl($objEmployee, $blnAddStaff),
-						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objEmployee->firstname . ' ' . $objEmployee->lastname), true),
+						$this->generateMemberUrl($objMember, $blnAddStaff),
+						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objMember->firstname . ' ' . $objMember->lastname), true),
 						$strLink,
-						($blnIsReadMore ? ' <span class="invisible">'.$objEmployee->firstname . ' ' . $objEmployee->lastname.'</span>' : ''));
+						($blnIsReadMore ? ' <span class="invisible">'.$objMember->firstname . ' ' . $objMember->lastname.'</span>' : ''));
 
 	}
 
