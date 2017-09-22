@@ -15,7 +15,7 @@
 /**
  * Namespace
  */
-namespace Respinar\Staff;
+namespace Respinar\Staff\Model;
 
 /**
  * Class StaffMemberModel

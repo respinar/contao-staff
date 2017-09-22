@@ -15,13 +15,13 @@
 /**
  * Namespace
  */
-namespace Respinar\Staff;
+namespace Respinar\Staff\Frontent\Module;
 
 
 /**
  * Class ModuleStaffList
  */
-class ModuleStaffList extends \ModuleStaff
+class ModuleStaffList extends ModuleStaff
 {
 
 	/**
