@@ -10,31 +10,11 @@
 
 
 /**
- * Register the namespaces
+ * Register PSR-0 namespaces
  */
-ClassLoader::addNamespaces(array
-(
-	'Respinar\Staff',
-));
-
-
-/**
- * Register the classes
- */
-ClassLoader::addClasses(array
-(
-	// Classes
-	'Respinar\Staff\Staff'              => 'system/modules/staff/classes/Staff.php',
-
-	// Modules
-	'Respinar\Staff\ModuleStaff'        => 'system/modules/staff/modules/ModuleStaff.php',
-	'Respinar\Staff\ModuleStaffList'    => 'system/modules/staff/modules/ModuleStaffList.php',
-	'Respinar\Staff\ModuleStaffDetail'  => 'system/modules/staff/modules/ModuleStaffDetail.php',
-
-	// Models
-	'Respinar\Staff\StaffCategoryModel' => 'system/modules/staff/models/StaffCategoryModel.php',
-	'Respinar\Staff\StaffMemberModel'   => 'system/modules/staff/models/StaffMemberModel.php',
-));
+ if (class_exists('NamespaceClassLoader')) {
+    NamespaceClassLoader::add('Respinar\Staff', 'system/modules/staff/library');
+}
 
 
 /**
