@@ -25,15 +25,20 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 ));
 
 /**
+ * Register models
+ */
+ $GLOBALS['TL_MODELS']['tl_staff_member']   = 'Respinar\Staff\Model\StaffMemberModel';
+ $GLOBALS['TL_MODELS']['tl_staff_category'] = 'Respinar\Staff\Model\StaffCategoryModel';
+
+/**
  * Front end modules
  */
-
 array_insert($GLOBALS['FE_MOD'], 2, array
 (
 	'staff' => array
 	(
-		'staff_list'    => 'Respinar\Staff\ModuleStaffList',
-		'staff_detail'  => 'Respinar\Staff\ModuleStaffDetail'
+		'staff_list'    => 'Respinar\Staff\Frontend\Module\ModuleStaffList',
+		'staff_detail'  => 'Respinar\Staff\Frontend\Module\ModuleStaffDetail'
 	)
 ));
 
