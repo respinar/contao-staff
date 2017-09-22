@@ -15,7 +15,9 @@
 /**
  * Namespace
  */
-namespace Respinar\Staff\Frontent\Module;
+namespace Respinar\Staff\Frontend\Module;
+
+use Respinar\Staff\Model\StaffCategoryModel;
 
 
 /**

@@ -15,7 +15,10 @@
 /**
  * Namespace
  */
-namespace Respinar\Staff\Frontent\Module;
+namespace Respinar\Staff\Frontend\Module;
+
+use Respinar\Staff\Model\StaffMemberModel;
+use Respinar\Staff\Frontend\Module\ModuleStaff;
 
 
 /**
@@ -73,7 +76,7 @@ class ModuleStaffDetail extends ModuleStaff
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$objMember = \StaffMemberModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->staff_categories);
+		$objMember = StaffMemberModel::findPublishedByParentAndIdOrAlias(\Input::get('items'),$this->staff_categories);
 
 		// Overwrite the page title
 		if ($objMember->title != '')

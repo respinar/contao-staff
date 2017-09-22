@@ -15,7 +15,10 @@
 /**
  * Namespace
  */
-namespace Respinar\Staff\Frontent\Module;
+namespace Respinar\Staff\Frontend\Module;
+
+use Respinar\Staff\Model\StaffMemberModel;
+use Respinar\Staff\Frontend\Module\ModuleStaff;
 
 
 /**
@@ -85,7 +88,7 @@ class ModuleStaffList extends ModuleStaff
 		$this->Template->persons = array();
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyStaff'];
 
-		$intTotal = \StaffMemberModel::countPublishedByPids($this->staff_categories);
+		$intTotal = StaffMemberModel::countPublishedByPids($this->staff_categories);
 
 		if ($intTotal < 1)
 		{
@@ -139,11 +142,11 @@ class ModuleStaffList extends ModuleStaff
 		// Get the items
 		if (isset($limit))
 		{
-			$objMembers = \StaffMemberModel::findPublishedByPids($this->staff_categories, null, $limit, $offset);
+			$objMembers = StaffMemberModel::findPublishedByPids($this->staff_categories, null, $limit, $offset);
 		}
 		else
 		{
-			$objMembers = \StaffMemberModel::findPublishedByPids($this->staff_categories, null, 0, $offset);
+			$objMembers = StaffMemberModel::findPublishedByPids($this->staff_categories, null, 0, $offset);
 		}
 
 
