@@ -23,13 +23,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Respinar\\Staff\\": "library/"
+            "Respinar\\Staff\\": "src/library/"
         }
     },
     "extra": {
         "contao": {
             "sources": {
-                "": "system/modules/staff"
+                "src": "system/modules/staff"
             },
             "transifex": {
                 "project": "contao-staff",
